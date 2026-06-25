@@ -1,0 +1,1098 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>서계동 재개발 스터디 대시보드</title>
+  <style>
+    :root {
+      --bg: #f6f5f1;
+      --panel: #ffffff;
+      --ink: #1f2428;
+      --muted: #66707a;
+      --line: #d9ded8;
+      --blue: #2563eb;
+      --green: #16845b;
+      --amber: #b7791f;
+      --red: #c2413d;
+      --teal: #0f766e;
+      --soft-blue: #eaf1ff;
+      --soft-green: #e9f6ef;
+      --soft-amber: #fff3d8;
+      --soft-red: #fdecec;
+      --shadow: 0 10px 28px rgba(31, 36, 40, 0.08);
+    }
+
+    * { box-sizing: border-box; }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans KR", "Apple SD Gothic Neo", Arial, sans-serif;
+      font-size: 15px;
+      line-height: 1.58;
+      letter-spacing: 0;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button, input {
+      font: inherit;
+    }
+
+    .app {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 268px minmax(0, 1fr);
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      padding: 22px 18px;
+      background: #ffffff;
+      border-right: 1px solid var(--line);
+      overflow: auto;
+    }
+
+    .brand {
+      display: grid;
+      gap: 6px;
+      margin-bottom: 18px;
+    }
+
+    .brand strong {
+      font-size: 19px;
+      line-height: 1.25;
+    }
+
+    .brand span {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .search {
+      width: 100%;
+      height: 40px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 0 12px;
+      background: #fbfbfa;
+      color: var(--ink);
+      outline: none;
+      margin: 10px 0 18px;
+    }
+
+    .search:focus {
+      border-color: var(--blue);
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+    }
+
+    .nav {
+      display: grid;
+      gap: 5px;
+      margin-bottom: 18px;
+    }
+
+    .nav a {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      min-height: 38px;
+      padding: 8px 10px;
+      border-radius: 8px;
+      color: #364049;
+      font-size: 14px;
+    }
+
+    .nav a:hover,
+    .nav a:focus {
+      background: #f0f4f3;
+      outline: none;
+    }
+
+    .nav svg {
+      flex: 0 0 18px;
+      width: 18px;
+      height: 18px;
+      stroke-width: 2;
+    }
+
+    .doc-links {
+      border-top: 1px solid var(--line);
+      padding-top: 16px;
+      display: grid;
+      gap: 8px;
+    }
+
+    .doc-links a {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 10px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      font-size: 13px;
+      background: #fbfbfa;
+      color: #384149;
+    }
+
+    .doc-links a:hover {
+      border-color: #b8c3bd;
+      background: #f3f7f5;
+    }
+
+    main {
+      min-width: 0;
+      padding: 28px;
+    }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 18px;
+      margin-bottom: 22px;
+    }
+
+    .title h1 {
+      margin: 0 0 8px;
+      font-size: clamp(24px, 3vw, 34px);
+      line-height: 1.2;
+      font-weight: 760;
+    }
+
+    .title p {
+      margin: 0;
+      color: var(--muted);
+      max-width: 760px;
+    }
+
+    .actions {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .icon-btn {
+      border: 1px solid var(--line);
+      background: var(--panel);
+      color: #2d353c;
+      border-radius: 8px;
+      height: 40px;
+      min-width: 40px;
+      padding: 0 12px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      cursor: pointer;
+      box-shadow: 0 2px 8px rgba(31, 36, 40, 0.04);
+    }
+
+    .icon-btn:hover {
+      background: #f8faf9;
+      border-color: #b9c2bc;
+    }
+
+    .icon-btn svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    .grid {
+      display: grid;
+      gap: 14px;
+    }
+
+    .summary-grid {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      margin-bottom: 16px;
+    }
+
+    .metric {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 15px;
+      box-shadow: var(--shadow);
+      min-height: 120px;
+      display: grid;
+      align-content: space-between;
+      gap: 12px;
+    }
+
+    .metric span {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .metric strong {
+      font-size: 22px;
+      line-height: 1.2;
+    }
+
+    .metric small {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .panel {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .panel-header {
+      padding: 17px 18px;
+      border-bottom: 1px solid var(--line);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .panel-header h2 {
+      margin: 0;
+      font-size: 18px;
+      line-height: 1.25;
+    }
+
+    .panel-header p {
+      margin: 4px 0 0;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .panel-body {
+      padding: 18px;
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(300px, 0.8fr);
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+
+    .three-col {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      min-height: 24px;
+      padding: 2px 8px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .badge.blue { color: var(--blue); background: var(--soft-blue); }
+    .badge.green { color: var(--green); background: var(--soft-green); }
+    .badge.amber { color: var(--amber); background: var(--soft-amber); }
+    .badge.red { color: var(--red); background: var(--soft-red); }
+    .badge.teal { color: var(--teal); background: #e6f5f3; }
+
+    .status-visual {
+      min-height: 230px;
+      display: grid;
+      gap: 14px;
+    }
+
+    .mini-map {
+      width: 100%;
+      height: 126px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fbfbfa;
+      overflow: hidden;
+    }
+
+    .stage-list {
+      display: grid;
+      gap: 8px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .stage-list li {
+      display: grid;
+      grid-template-columns: 96px 1fr auto;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 0;
+      border-bottom: 1px solid #edf0ec;
+    }
+
+    .stage-list li:last-child {
+      border-bottom: 0;
+    }
+
+    .stage-date {
+      color: var(--muted);
+      font-size: 13px;
+      white-space: nowrap;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+
+    th, td {
+      text-align: left;
+      vertical-align: top;
+      padding: 10px 11px;
+      border-bottom: 1px solid #edf0ec;
+    }
+
+    th {
+      color: #4b5560;
+      font-size: 12px;
+      background: #f8faf8;
+      font-weight: 760;
+    }
+
+    tr:last-child td {
+      border-bottom: 0;
+    }
+
+    .table-wrap {
+      overflow-x: auto;
+    }
+
+    .check-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .task {
+      min-height: 52px;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 11px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fbfbfa;
+    }
+
+    .task input {
+      margin-top: 4px;
+      width: 18px;
+      height: 18px;
+      accent-color: var(--green);
+      flex: 0 0 auto;
+    }
+
+    .task span {
+      display: block;
+      color: #2f383f;
+      font-size: 14px;
+    }
+
+    .task small {
+      display: block;
+      color: var(--muted);
+      font-size: 12px;
+      margin-top: 2px;
+    }
+
+    .task.done span {
+      color: var(--muted);
+      text-decoration: line-through;
+    }
+
+    .progress {
+      width: 100%;
+      height: 10px;
+      border-radius: 999px;
+      background: #e8ece8;
+      overflow: hidden;
+    }
+
+    .progress > div {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--green), var(--blue));
+      transition: width 180ms ease;
+    }
+
+    .filter-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+
+    .filter-chip {
+      border: 1px solid var(--line);
+      background: #fbfbfa;
+      color: #354049;
+      border-radius: 999px;
+      padding: 6px 10px;
+      cursor: pointer;
+      font-size: 13px;
+    }
+
+    .filter-chip.active {
+      border-color: var(--green);
+      color: var(--green);
+      background: var(--soft-green);
+      font-weight: 760;
+    }
+
+    .gate {
+      display: grid;
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+      gap: 8px;
+    }
+
+    .gate-step {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 10px;
+      min-height: 84px;
+      background: #fbfbfa;
+      display: grid;
+      align-content: start;
+      gap: 7px;
+    }
+
+    .gate-step b {
+      font-size: 13px;
+    }
+
+    .gate-step span {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .note {
+      border-left: 4px solid var(--amber);
+      background: #fffaf0;
+      padding: 12px 14px;
+      color: #4b4234;
+      border-radius: 0 8px 8px 0;
+    }
+
+    .section {
+      margin-bottom: 16px;
+    }
+
+    .hidden-by-search {
+      display: none !important;
+    }
+
+    .mobile-tabs {
+      display: none;
+    }
+
+    @media (max-width: 1080px) {
+      .app {
+        grid-template-columns: 1fr;
+      }
+
+      .sidebar {
+        display: none;
+      }
+
+      main {
+        padding: 18px 14px 84px;
+      }
+
+      .topbar {
+        display: grid;
+      }
+
+      .actions {
+        justify-content: flex-start;
+      }
+
+      .summary-grid,
+      .three-col,
+      .two-col {
+        grid-template-columns: 1fr;
+      }
+
+      .gate {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .check-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .mobile-tabs {
+        position: fixed;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 20;
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 1px;
+        padding: 7px;
+        background: rgba(255, 255, 255, 0.96);
+        border-top: 1px solid var(--line);
+        backdrop-filter: blur(10px);
+      }
+
+      .mobile-tabs a {
+        min-width: 0;
+        height: 48px;
+        border-radius: 8px;
+        display: grid;
+        place-items: center;
+        gap: 2px;
+        color: #46515a;
+        font-size: 11px;
+      }
+
+      .mobile-tabs svg {
+        width: 18px;
+        height: 18px;
+      }
+
+      .stage-list li {
+        grid-template-columns: 82px 1fr;
+      }
+
+      .stage-list .badge {
+        grid-column: 2;
+        justify-self: start;
+      }
+    }
+
+    @media (max-width: 560px) {
+      body {
+        font-size: 14px;
+      }
+
+      .title h1 {
+        font-size: 24px;
+      }
+
+      .metric {
+        min-height: 104px;
+      }
+
+      .metric strong {
+        font-size: 20px;
+      }
+
+      .panel-header {
+        display: grid;
+      }
+
+      th, td {
+        padding: 9px;
+      }
+
+      .gate {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media print {
+      .sidebar, .mobile-tabs, .actions, .search, .filter-row {
+        display: none !important;
+      }
+
+      .app {
+        display: block;
+      }
+
+      main {
+        padding: 0;
+      }
+
+      .panel, .metric {
+        box-shadow: none;
+        break-inside: avoid;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="app" id="top">
+    <aside class="sidebar">
+      <div class="brand">
+        <strong>서계동 재개발 스터디</strong>
+        <span>공식자료 중심 대시보드</span>
+      </div>
+      <input class="search" id="searchInput" type="search" placeholder="검색">
+      <nav class="nav" aria-label="주요 섹션">
+        <a href="#overview"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 4h7v7H4zM13 4h7v7h-7zM4 13h7v7H4zM13 13h7v7h-7z"/></svg>개요</a>
+        <a href="#timeline"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 6v6l4 2"/><circle cx="12" cy="12" r="9"/></svg>단계</a>
+        <a href="#business"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 19V5M4 19h16M8 16v-5M12 16V8M16 16v-3"/></svg>사업성</a>
+        <a href="#risk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 3l9 16H3z"/><path d="M12 9v4M12 17h.01"/></svg>규제·권리</a>
+        <a href="#price"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3 12h18M5 7h14M7 17h10"/></svg>시세</a>
+        <a href="#field"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 18l-6 3V6l6-3 6 3 6-3v15l-6 3-6-3z"/><path d="M9 3v15M15 6v15"/></svg>임장</a>
+        <a href="#money"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 7h16v10H4z"/><path d="M8 11h.01M16 13h.01M12 12a2 2 0 1 0 0 .01"/></svg>자금</a>
+        <a href="#tasks"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>다음 액션</a>
+      </nav>
+      <div class="doc-links">
+        <a href="00_공식단계_스냅샷.md">00 스냅샷 <span>열기</span></a>
+        <a href="01_사업단계_타임라인.md">01 타임라인 <span>열기</span></a>
+        <a href="02_사업성_체크리스트.md">02 사업성 <span>열기</span></a>
+        <a href="03_시세_매물_트래커.md">03 시세 <span>열기</span></a>
+        <a href="06_규제_권리체크.md">06 권리체크 <span>열기</span></a>
+        <a href="07_자금계획_시뮬레이션.md">07 자금계획 <span>열기</span></a>
+        <a href="08_온라인조사_진행현황.md">08 진행현황 <span>열기</span></a>
+        <a href="09_토지거래허가구역_토지조서_메모.md">09 토지조서 <span>열기</span></a>
+      </div>
+    </aside>
+
+    <main>
+      <div class="topbar">
+        <div class="title">
+          <h1>용산 서계동 재개발 스터디</h1>
+          <p>공식 단계, 사업성 수치, 규제·권리 리스크, 현장 확인사항을 한 화면에서 추적한다.</p>
+        </div>
+        <div class="actions">
+          <button class="icon-btn" type="button" onclick="window.print()" title="인쇄">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M6 9V2h12v7"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><path d="M6 14h12v8H6z"/></svg>
+            인쇄
+          </button>
+          <a class="icon-btn" href="서계동_재개발_스터디_작업계획.md" title="작업계획 열기">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M8 13h8M8 17h6"/></svg>
+            작업계획
+          </a>
+        </div>
+      </div>
+
+      <section class="grid summary-grid searchable" id="overview" data-keywords="개요 공식 단계 면적 토지등소유자 조합설립">
+        <div class="metric">
+          <span>공식 단계</span>
+          <strong>추진위원회승인</strong>
+          <small>정비사업 정보몽땅 기준, 조합설립인가는 미확인</small>
+        </div>
+        <div class="metric">
+          <span>정비구역 면적</span>
+          <strong>112,953㎡</strong>
+          <small>공식 시스템 기준. 가이드라인 113,279㎡와 구분</small>
+        </div>
+        <div class="metric">
+          <span>토지등소유자</span>
+          <strong>1,948명</strong>
+          <small>조합원 수는 추진위 단계라 0명 표기</small>
+        </div>
+        <div class="metric">
+          <span>다음 변곡점</span>
+          <strong>조합설립인가</strong>
+          <small>이후 사업시행인가, 시공자 선정 추적</small>
+        </div>
+      </section>
+
+      <section class="two-col searchable" data-keywords="공식 스냅샷 서울역 지도 가이드라인">
+        <article class="panel">
+          <div class="panel-header">
+            <div>
+              <h2>공식 기준 스냅샷</h2>
+              <p>2026-06-26 기준, 공식자료와 보도자료를 분리해서 본다.</p>
+            </div>
+            <span class="badge green">공식 우선</span>
+          </div>
+          <div class="panel-body table-wrap">
+            <table>
+              <tbody>
+                <tr><th>공식 사업명</th><td>서계통합구역 주택정비형 재개발사업</td></tr>
+                <tr><th>사업구분</th><td>재개발(주택정비형), 공공지원 대상</td></tr>
+                <tr><th>공식 단계</th><td>추진위원회승인</td></tr>
+                <tr><th>언론/조합 이벤트</th><td>조합설립 창립총회 개최·완료 보도</td></tr>
+                <tr><th>미확인 핵심사항</th><td>조합설립인가 신청 여부, 인가 완료 여부</td></tr>
+                <tr><th>추진위 문의</th><td>02-717-7003</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </article>
+
+        <article class="panel">
+          <div class="panel-header">
+            <div>
+              <h2>입지 메모</h2>
+              <p>서울역, 구릉지, 철도 단절, 남산 조망이 핵심 변수다.</p>
+            </div>
+          </div>
+          <div class="panel-body status-visual">
+            <svg class="mini-map" viewBox="0 0 520 160" role="img" aria-label="서계동 입지 요약 도식">
+              <rect width="520" height="160" fill="#fbfbfa"/>
+              <path d="M40 118 C120 78 188 96 260 70 C335 42 424 55 486 30" fill="none" stroke="#c5d0c8" stroke-width="18" stroke-linecap="round"/>
+              <path d="M52 122 C126 85 190 100 260 76 C335 50 421 62 478 38" fill="none" stroke="#6b7c71" stroke-width="3" stroke-dasharray="8 8"/>
+              <path d="M24 108 L190 108" stroke="#2563eb" stroke-width="7" stroke-linecap="round"/>
+              <path d="M24 125 L190 125" stroke="#2563eb" stroke-width="7" stroke-linecap="round" opacity=".65"/>
+              <circle cx="92" cy="116" r="17" fill="#eaf1ff" stroke="#2563eb" stroke-width="3"/>
+              <text x="92" y="121" text-anchor="middle" font-size="13" font-weight="700" fill="#1f3f8f">서울역</text>
+              <circle cx="306" cy="66" r="20" fill="#e9f6ef" stroke="#16845b" stroke-width="3"/>
+              <text x="306" y="71" text-anchor="middle" font-size="13" font-weight="700" fill="#16845b">서계</text>
+              <path d="M380 36 L420 14 L464 36 Z" fill="#fff3d8" stroke="#b7791f" stroke-width="2"/>
+              <text x="423" y="58" text-anchor="middle" font-size="13" font-weight="700" fill="#8a5b16">남산</text>
+              <path d="M252 112 h162" stroke="#c2413d" stroke-width="3" stroke-dasharray="6 7"/>
+              <text x="333" y="135" text-anchor="middle" font-size="13" fill="#c2413d">경사·단차 확인</text>
+            </svg>
+            <div class="note">
+              서울시 가이드라인은 “서울역 활력·보행·경관”을 강조하지만, 정비계획·사업시행인가 과정에서 변경될 수 있다고 명시되어 있다.
+            </div>
+          </div>
+        </article>
+      </section>
+
+      <section class="panel section searchable" id="timeline" data-keywords="타임라인 추진경과 조합설립 사업시행 시공자 관리처분">
+        <div class="panel-header">
+          <div>
+            <h2>사업단계 타임라인</h2>
+            <p>공식 추진경과 기준으로 확인된 이벤트만 `공식 확인`으로 표시한다.</p>
+          </div>
+          <a class="badge blue" href="01_사업단계_타임라인.md">문서 열기</a>
+        </div>
+        <div class="panel-body">
+          <ul class="stage-list">
+            <li><span class="stage-date">2022-12-29</span><strong>신속통합기획 2차 후보지 선정</strong><span class="badge teal">후보지</span></li>
+            <li><span class="stage-date">2024-06</span><strong>서울시 신속통합기획 가이드라인 확정</strong><span class="badge blue">가이드라인</span></li>
+            <li><span class="stage-date">2025-04-10</span><strong>정비구역 지정 및 정비계획 결정 고시</strong><span class="badge green">공식 고시</span></li>
+            <li><span class="stage-date">2025-11-28</span><strong>조합설립추진위원회 변경 승인, 동의율 76.48%</strong><span class="badge green">공식 확인</span></li>
+            <li><span class="stage-date">2026-01-09</span><strong>정비사업전문관리업자 화성씨앤디 선정</strong><span class="badge green">공식 확인</span></li>
+            <li><span class="stage-date">2026-04-25</span><strong>조합설립 창립총회 개최·완료 보도</strong><span class="badge amber">공식단계 미반영</span></li>
+            <li><span class="stage-date">다음</span><strong>조합설립인가 확인</strong><span class="badge red">최우선</span></li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="three-col searchable" id="business" data-keywords="사업성 세대수 비례율 용적률 공사비 분담금 수치 충돌">
+        <article class="panel">
+          <div class="panel-header">
+            <div>
+              <h2>사업성 입력값</h2>
+              <p>현재 확보된 공식값</p>
+            </div>
+          </div>
+          <div class="panel-body table-wrap">
+            <table>
+              <tbody>
+                <tr><th>구역면적</th><td>112,953㎡</td></tr>
+                <tr><th>토지등소유자</th><td>1,948명</td></tr>
+                <tr><th>택지</th><td>85,009㎡</td></tr>
+                <tr><th>도로</th><td>14,423㎡</td></tr>
+                <tr><th>공원</th><td>8,764㎡</td></tr>
+                <tr><th>최고높이</th><td>165m, 지상 39층</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </article>
+
+        <article class="panel">
+          <div class="panel-header">
+            <div>
+              <h2>핵심 계산</h2>
+              <p>1차 산식</p>
+            </div>
+          </div>
+          <div class="panel-body table-wrap">
+            <table>
+              <tbody>
+                <tr><th>세대수/소유자</th><td>2,691 / 1,948 = 1.38배</td></tr>
+                <tr><th>택지 비율</th><td>75.26%</td></tr>
+                <tr><th>도로 비율</th><td>12.77%</td></tr>
+                <tr><th>공원 비율</th><td>7.76%</td></tr>
+                <tr><th>사업시행 예정</th><td>구역지정 고시일부터 10년 이내</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </article>
+
+        <article class="panel">
+          <div class="panel-header">
+            <div>
+              <h2>충돌 수치</h2>
+              <p>원문 재확인 대상</p>
+            </div>
+            <span class="badge amber">확인 필요</span>
+          </div>
+          <div class="panel-body table-wrap">
+            <table>
+              <tbody>
+                <tr><th>면적</th><td>112,953㎡ vs 113,279㎡</td></tr>
+                <tr><th>세대수</th><td>2,691 vs 2,714 vs 2,900 내외</td></tr>
+                <tr><th>비례율</th><td>101.02% vs 96.2%</td></tr>
+                <tr><th>분담금 감소</th><td>1인당 평균 3,200만원 보도, 산식 확인 필요</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </article>
+      </section>
+
+      <section class="panel section searchable" id="risk" data-keywords="규제 권리 토지거래허가 투기과열 권리산정기준일 조합원 지위양도">
+        <div class="panel-header">
+          <div>
+            <h2>규제·권리 체크</h2>
+            <p>매물 보기 전 통과해야 할 게이트</p>
+          </div>
+          <a class="badge red" href="06_규제_권리체크.md">상세 문서</a>
+        </div>
+        <div class="panel-body">
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr><th>항목</th><th>현재 판단</th><th>다음 확인</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>투기과열지구</td><td>용산구 해당 가능성 높음</td><td>국토교통부 최신 고시</td></tr>
+                <tr><td>토지거래허가</td><td>조서 확보: 1,269필지, 112,599.06㎡</td><td>09 토지조서 메모</td></tr>
+                <tr><td>조합원 지위양도</td><td>재개발은 관리처분인가 후 제한이 핵심</td><td>출구전략에서 재확인</td></tr>
+                <tr><td>권리산정기준일</td><td>별도 고시 여부 미확인</td><td>서울시 고시, 용산구청</td></tr>
+                <tr><td>분양권 산정</td><td>필지분할·집합건물 전환·토지건물 분리취득 주의</td><td>등기·대장 대조</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div style="height:14px"></div>
+          <div class="gate" aria-label="권리검증 게이트">
+            <div class="gate-step"><b>1 관찰</b><span>위치·가격·유형</span></div>
+            <div class="gate-step"><b>2 후보</b><span>등기·건축물·토지대장</span></div>
+            <div class="gate-step"><b>3 분양대상</b><span>기준일·지분구조</span></div>
+            <div class="gate-step"><b>4 조합원 지위</b><span>인가·양도 제한</span></div>
+            <div class="gate-step"><b>5 세입자</b><span>계약서·전입세대</span></div>
+            <div class="gate-step"><b>6 자금</b><span>총투입금·분담금</span></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="two-col searchable" id="price" data-keywords="시세 매물 실거래 호가 프리미엄 비교군">
+        <article class="panel">
+          <div class="panel-header">
+            <div>
+              <h2>시세·매물 트래커</h2>
+              <p>실거래와 호가를 분리 기록한다.</p>
+            </div>
+            <a class="badge blue" href="03_시세_매물_트래커.md">기록지</a>
+          </div>
+          <div class="panel-body table-wrap">
+            <table>
+              <thead>
+                <tr><th>수집 대상</th><th>목적</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>서계동 구역 내 빌라·단독 실거래</td><td>실제 진입가격 확인</td></tr>
+                <tr><td>완공 신축</td><td>완공 후 기대가격 상단 확인</td></tr>
+                <tr><td>관리처분 이후 입주권</td><td>입주권 프리미엄·유동성 비교</td></tr>
+                <tr><td>사업시행인가 전후 구역</td><td>다음 단계 가격 변화 추정</td></tr>
+                <tr><td>신통기획 초기 구역</td><td>초기 기대감 반영률 비교</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </article>
+
+        <article class="panel">
+          <div class="panel-header">
+            <div>
+              <h2>가격 판단 메모</h2>
+              <p>최근 24개월 실거래 반영</p>
+            </div>
+            <span class="badge green">1차 수집</span>
+          </div>
+          <div class="panel-body">
+            <div class="mini-list">
+              <div><span>다세대/연립</span><b>92건 · 중간 7.25억 · 토지단가 1.483억/3.3㎡</b></div>
+              <div><span>단독/다가구</span><b>23건 · 중간 9.6억 · 토지단가 0.559억/3.3㎡</b></div>
+              <div><span>아파트</span><b>70건 · 소형 신축 직거래 비교군</b></div>
+            </div>
+            <div class="note">
+              원천자료는 `data/서계동_실거래_정규화_202406_202605.csv`에 저장했다. 다음 온라인 작업은 구역 경계 대조와 주변 신축 비교군 수집이다.
+            </div>
+          </div>
+        </article>
+      </section>
+
+      <section class="two-col searchable" id="field" data-keywords="임장 현장 서울역 경사 야간 주말 출근">
+        <article class="panel">
+          <div class="panel-header">
+            <div>
+              <h2>임장 계획</h2>
+              <p>시간대별로 3회 분리</p>
+            </div>
+            <a class="badge green" href="04_임장_기록.md">기록지</a>
+          </div>
+          <div class="panel-body table-wrap">
+            <table>
+              <thead>
+                <tr><th>회차</th><th>시간대</th><th>확인 목적</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>1차</td><td>평일 출근</td><td>서울역 접근, 버스·도보 동선, 통근 수요</td></tr>
+                <tr><td>2차</td><td>주말 낮</td><td>생활편의, 상권, 가족 단위 보행, 공원 접근</td></tr>
+                <tr><td>3차</td><td>야간</td><td>조도, 치안 체감, 경사로 피로도, 귀가 동선</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </article>
+
+        <article class="panel">
+          <div class="panel-header">
+            <div>
+              <h2>현장 체크 포인트</h2>
+              <p>구역 특성상 직접 확인 필수</p>
+            </div>
+          </div>
+          <div class="panel-body">
+            <div class="check-grid">
+              <label class="task"><input type="checkbox" data-task="field-1"><span>서울역 실제 도보시간<small>출입구, 횡단보도, 경사 포함</small></span></label>
+              <label class="task"><input type="checkbox" data-task="field-2"><span>급경사·옹벽·계단<small>야간 피로도와 안전성</small></span></label>
+              <label class="task"><input type="checkbox" data-task="field-3"><span>철도변 소음·단절<small>연결통로와 보행 흐름</small></span></label>
+              <label class="task"><input type="checkbox" data-task="field-4"><span>중개업소 3~5곳 인터뷰<small>동일 질문 반복</small></span></label>
+            </div>
+          </div>
+        </article>
+      </section>
+
+      <section class="panel section searchable" id="money" data-keywords="자금계획 총투입금 취득세 대출 이자 분담금">
+        <div class="panel-header">
+          <div>
+            <h2>자금계획 시뮬레이션</h2>
+            <p>후보 매물이 생기면 총투입금과 보유기간 비용을 계산한다.</p>
+          </div>
+          <a class="badge blue" href="07_자금계획_시뮬레이션.md">계산표</a>
+        </div>
+        <div class="panel-body table-wrap">
+          <table>
+            <thead>
+              <tr><th>구분</th><th>입력 항목</th><th>확인 포인트</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>초기 실투자금</td><td>매수가, 승계보증금, 계약금, 잔금</td><td>잔금 일정과 보증금 승계</td></tr>
+              <tr><td>취득 부대비용</td><td>취득세, 중개보수, 법무비용, 인지세</td><td>주택수·규제지역 영향</td></tr>
+              <tr><td>보유기간 비용</td><td>대출이자 4%·5%·6%, 보유세, 공실비용</td><td>사업 지연 2년 시나리오</td></tr>
+              <tr><td>추가분담금</td><td>조합원분양가, 권리가액, 평형별 분담금</td><td>감정평가 전까지 보수 적용</td></tr>
+              <tr><td>스트레스 테스트</td><td>금리 +1%p, 공사비 +15%, 분양가 -5%</td><td>버틸 수 있는지 판단</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="panel section searchable" id="tasks" data-keywords="다음 액션 체크리스트 고시 실거래 임장 중개업소">
+        <div class="panel-header">
+          <div>
+            <h2>다음 액션</h2>
+            <p>체크 상태는 이 브라우저에 저장된다.</p>
+          </div>
+          <span class="badge green" id="progressLabel">0%</span>
+        </div>
+        <div class="panel-body">
+          <div class="progress" aria-label="진행률"><div id="progressBar"></div></div>
+          <div style="height:14px"></div>
+          <div class="filter-row" aria-label="작업 필터">
+            <button class="filter-chip active" type="button" data-filter="all">전체</button>
+            <button class="filter-chip" type="button" data-filter="official">공식자료</button>
+            <button class="filter-chip" type="button" data-filter="price">시세</button>
+            <button class="filter-chip" type="button" data-filter="field">임장</button>
+            <button class="filter-chip" type="button" data-filter="rights">권리</button>
+          </div>
+          <div class="check-grid" id="taskList">
+            <label class="task" data-category="official"><input type="checkbox" data-task="official-1" checked><span>서울특별시 고시 제2025-188호 원문 확보<small>정비계획 결정도서와 세대수 확인</small></span></label>
+            <label class="task" data-category="official"><input type="checkbox" data-task="official-2"><span>조합설립인가 신청/완료 여부 확인<small>용산구청, 정비사업 정보몽땅</small></span></label>
+            <label class="task" data-category="official"><input type="checkbox" data-task="official-3" checked><span>추정비례율 101.02% 산식 확인<small>기준일과 총수입·총지출 확인</small></span></label>
+            <label class="task" data-category="price"><input type="checkbox" data-task="price-0" checked><span>최근 24개월 실거래 정리<small>서울부동산정보광장 원천자료 확보</small></span></label>
+            <label class="task" data-category="price"><input type="checkbox" data-task="price-1"><span>구역 경계 지번 대조<small>정비구역 안 거래만 분리</small></span></label>
+            <label class="task" data-category="price"><input type="checkbox" data-task="price-2"><span>비교군 4종 가격 입력<small>신축, 입주권, 사업시행 전후, 신통기획 초기</small></span></label>
+            <label class="task" data-category="field"><input type="checkbox" data-task="field-5"><span>평일 출근 임장<small>서울역 접근과 통근 동선</small></span></label>
+            <label class="task" data-category="field"><input type="checkbox" data-task="field-6"><span>주말 낮 임장<small>상권·생활편의·공원 접근</small></span></label>
+            <label class="task" data-category="field"><input type="checkbox" data-task="field-7"><span>야간 임장<small>조도·치안·경사 체감</small></span></label>
+            <label class="task" data-category="rights"><input type="checkbox" data-task="rights-0" checked><span>토허제 토지조서 확보<small>서계동 33 일대 1,269필지 CSV화</small></span></label>
+            <label class="task" data-category="rights"><input type="checkbox" data-task="rights-1"><span>권리산정기준일 고시 여부 확인<small>서울시 고시, 용산구청</small></span></label>
+            <label class="task" data-category="rights"><input type="checkbox" data-task="rights-2"><span>중개업소 3~5곳 동일 질문 인터뷰<small>답변 차이 비교</small></span></label>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <nav class="mobile-tabs" aria-label="모바일 이동">
+    <a href="#overview"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 4h7v7H4zM13 4h7v7h-7zM4 13h7v7H4zM13 13h7v7h-7z"/></svg><span>개요</span></a>
+    <a href="#business"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 19V5M4 19h16M8 16v-5M12 16V8M16 16v-3"/></svg><span>사업성</span></a>
+    <a href="#risk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 3l9 16H3z"/><path d="M12 9v4M12 17h.01"/></svg><span>권리</span></a>
+    <a href="#field"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 18l-6 3V6l6-3 6 3 6-3v15l-6 3-6-3z"/><path d="M9 3v15M15 6v15"/></svg><span>임장</span></a>
+    <a href="#tasks"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg><span>액션</span></a>
+  </nav>
+
+  <script>
+    const checkboxes = Array.from(document.querySelectorAll('input[type="checkbox"][data-task]'));
+    const progressBar = document.getElementById('progressBar');
+    const progressLabel = document.getElementById('progressLabel');
+
+    function loadChecks() {
+      checkboxes.forEach((box) => {
+        const saved = localStorage.getItem('seogye:' + box.dataset.task);
+        box.checked = saved === '1';
+        box.closest('.task')?.classList.toggle('done', box.checked);
+      });
+      updateProgress();
+    }
+
+    function updateProgress() {
+      const total = checkboxes.length;
+      const done = checkboxes.filter((box) => box.checked).length;
+      const percent = total ? Math.round((done / total) * 100) : 0;
+      if (progressBar) progressBar.style.width = percent + '%';
+      if (progressLabel) progressLabel.textContent = percent + '%';
+    }
+
+    checkboxes.forEach((box) => {
+      box.addEventListener('change', () => {
+        localStorage.setItem('seogye:' + box.dataset.task, box.checked ? '1' : '0');
+        box.closest('.task')?.classList.toggle('done', box.checked);
+        updateProgress();
+      });
+    });
+
+    const filterButtons = Array.from(document.querySelectorAll('.filter-chip'));
+    const taskItems = Array.from(document.querySelectorAll('#taskList .task'));
+
+    filterButtons.forEach((button) => {
+      button.addEventListener('click', () => {
+        const filter = button.dataset.filter;
+        filterButtons.forEach((item) => item.classList.remove('active'));
+        button.classList.add('active');
+        taskItems.forEach((item) => {
+          item.style.display = filter === 'all' || item.dataset.category === filter ? '' : 'none';
+        });
+      });
+    });
+
+    const searchInput = document.getElementById('searchInput');
+    const searchable = Array.from(document.querySelectorAll('.searchable'));
+
+    if (searchInput) {
+      searchInput.addEventListener('input', () => {
+        const query = searchInput.value.trim().toLowerCase();
+        searchable.forEach((section) => {
+          const text = (section.innerText + ' ' + (section.dataset.keywords || '')).toLowerCase();
+          section.classList.toggle('hidden-by-search', query.length > 0 && !text.includes(query));
+        });
+      });
+    }
+
+    loadChecks();
+  </script>
+</body>
+</html>
