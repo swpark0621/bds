@@ -663,6 +663,7 @@
         <a href="07_자금계획_시뮬레이션.md">07 자금계획 <span>열기</span></a>
         <a href="08_온라인조사_진행현황.md">08 진행현황 <span>열기</span></a>
         <a href="09_토지거래허가구역_토지조서_메모.md">09 토지조서 <span>열기</span></a>
+        <a href="10_실거래_토허조서_대조.md">10 지번대조 <span>열기</span></a>
       </div>
     </aside>
 
@@ -917,6 +918,7 @@
               <div><span>다세대/연립</span><b>92건 · 중간 7.25억 · 토지단가 1.483억/3.3㎡</b></div>
               <div><span>단독/다가구</span><b>23건 · 중간 9.6억 · 토지단가 0.559억/3.3㎡</b></div>
               <div><span>아파트</span><b>70건 · 소형 신축 직거래 비교군</b></div>
+              <div><span>토허조서 대조</span><b>다세대 73건 포함 · 19건 미포함</b></div>
             </div>
             <div class="note">
               원천자료는 `data/서계동_실거래_정규화_202406_202605.csv`에 저장했다. 다음 온라인 작업은 구역 경계 대조와 주변 신축 비교군 수집이다.
@@ -994,7 +996,7 @@
         <div class="panel-header">
           <div>
             <h2>다음 액션</h2>
-            <p>체크 상태는 이 브라우저에 저장된다.</p>
+            <p>아래 다음 액션 기준으로 계산된다.</p>
           </div>
           <span class="badge green" id="progressLabel">0%</span>
         </div>
@@ -1013,7 +1015,7 @@
             <label class="task" data-category="official"><input type="checkbox" data-task="official-2"><span>조합설립인가 신청/완료 여부 확인<small>용산구청, 정비사업 정보몽땅</small></span></label>
             <label class="task" data-category="official"><input type="checkbox" data-task="official-3" checked><span>추정비례율 101.02% 산식 확인<small>기준일과 총수입·총지출 확인</small></span></label>
             <label class="task" data-category="price"><input type="checkbox" data-task="price-0" checked><span>최근 24개월 실거래 정리<small>서울부동산정보광장 원천자료 확보</small></span></label>
-            <label class="task" data-category="price"><input type="checkbox" data-task="price-1"><span>구역 경계 지번 대조<small>정비구역 안 거래만 분리</small></span></label>
+            <label class="task" data-category="price"><input type="checkbox" data-task="price-1" checked><span>토허 조서 지번 대조<small>다세대 73건 포함, 19건 미포함</small></span></label>
             <label class="task" data-category="price"><input type="checkbox" data-task="price-2"><span>비교군 4종 가격 입력<small>신축, 입주권, 사업시행 전후, 신통기획 초기</small></span></label>
             <label class="task" data-category="field"><input type="checkbox" data-task="field-5"><span>평일 출근 임장<small>서울역 접근과 통근 동선</small></span></label>
             <label class="task" data-category="field"><input type="checkbox" data-task="field-6"><span>주말 낮 임장<small>상권·생활편의·공원 접근</small></span></label>
@@ -1037,21 +1039,22 @@
 
   <script>
     const checkboxes = Array.from(document.querySelectorAll('input[type="checkbox"][data-task]'));
+    const progressCheckboxes = Array.from(document.querySelectorAll('#taskList input[type="checkbox"][data-task]'));
     const progressBar = document.getElementById('progressBar');
     const progressLabel = document.getElementById('progressLabel');
 
     function loadChecks() {
       checkboxes.forEach((box) => {
         const saved = localStorage.getItem('seogye:' + box.dataset.task);
-        box.checked = saved === '1';
+        if (saved !== null) box.checked = saved === '1';
         box.closest('.task')?.classList.toggle('done', box.checked);
       });
       updateProgress();
     }
 
     function updateProgress() {
-      const total = checkboxes.length;
-      const done = checkboxes.filter((box) => box.checked).length;
+      const total = progressCheckboxes.length;
+      const done = progressCheckboxes.filter((box) => box.checked).length;
       const percent = total ? Math.round((done / total) * 100) : 0;
       if (progressBar) progressBar.style.width = percent + '%';
       if (progressLabel) progressLabel.textContent = percent + '%';
