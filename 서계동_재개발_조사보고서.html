@@ -1,0 +1,703 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>용산 서계동 재개발 조사 보고서</title>
+  <style>
+    :root {
+      --bg: #f6f7f8;
+      --surface: #ffffff;
+      --ink: #20262d;
+      --muted: #69737d;
+      --line: #d8dde3;
+      --accent: #2563eb;
+      --accent-soft: color-mix(in srgb, var(--accent) 12%, white);
+      --shadow: 0 12px 30px rgba(32, 38, 45, 0.08);
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans KR", "Apple SD Gothic Neo", Arial, sans-serif;
+      font-size: 16px;
+      line-height: 1.7;
+      letter-spacing: 0;
+    }
+
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .layout {
+      display: grid;
+      grid-template-columns: 280px minmax(0, 1fr);
+      min-height: 100vh;
+    }
+
+    aside {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      padding: 22px 18px;
+      background: #fff;
+      border-right: 1px solid var(--line);
+      overflow: auto;
+    }
+
+    .brand {
+      display: grid;
+      gap: 5px;
+      margin-bottom: 16px;
+    }
+
+    .brand strong {
+      font-size: 18px;
+      line-height: 1.3;
+    }
+
+    .brand span {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .quick-links,
+    .toc {
+      display: grid;
+      gap: 7px;
+      margin-top: 16px;
+      padding-top: 16px;
+      border-top: 1px solid var(--line);
+    }
+
+    .quick-links a,
+    .toc a {
+      display: block;
+      border-radius: 8px;
+      padding: 8px 10px;
+      color: #34404a;
+      font-size: 14px;
+    }
+
+    .quick-links a {
+      border: 1px solid var(--line);
+      background: #fbfbfc;
+    }
+
+    .quick-links a[aria-current="page"] {
+      border-color: color-mix(in srgb, var(--accent) 46%, var(--line));
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    .toc a:hover,
+    .quick-links a:hover {
+      background: #eef2f5;
+      text-decoration: none;
+    }
+
+    .toc .level-3 {
+      padding-left: 22px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    main {
+      min-width: 0;
+      padding: 30px;
+    }
+
+    .hero {
+      max-width: 1120px;
+      margin: 0 auto 18px;
+      display: grid;
+      gap: 14px;
+    }
+
+    .eyebrow {
+      color: var(--accent);
+      font-weight: 760;
+      font-size: 13px;
+    }
+
+    .hero h1 {
+      margin: 0;
+      font-size: clamp(28px, 4vw, 44px);
+      line-height: 1.18;
+      letter-spacing: 0;
+    }
+
+    .hero p {
+      margin: 0;
+      color: var(--muted);
+      max-width: 840px;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 40px;
+      border-radius: 8px;
+      border: 1px solid var(--line);
+      background: var(--surface);
+      color: #2c3640;
+      padding: 0 12px;
+      font-size: 14px;
+      box-shadow: 0 2px 8px rgba(32, 38, 45, 0.05);
+    }
+
+    .button.primary {
+      border-color: var(--accent);
+      background: var(--accent);
+      color: #fff;
+    }
+
+    .button:hover {
+      text-decoration: none;
+      background: #f9fafb;
+    }
+
+    .button.primary:hover {
+      background: color-mix(in srgb, var(--accent) 88%, black);
+    }
+
+    article {
+      max-width: 1120px;
+      margin: 0 auto;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+      padding: 28px;
+    }
+
+    article h1 {
+      margin: 0 0 14px;
+      font-size: clamp(24px, 3vw, 34px);
+      line-height: 1.25;
+      letter-spacing: 0;
+    }
+
+    article h2 {
+      margin: 34px 0 12px;
+      padding-top: 10px;
+      border-top: 1px solid var(--line);
+      font-size: 24px;
+      line-height: 1.35;
+      letter-spacing: 0;
+    }
+
+    article h3 {
+      margin: 26px 0 10px;
+      font-size: 19px;
+      line-height: 1.4;
+      letter-spacing: 0;
+    }
+
+    article p,
+    article ul,
+    article ol,
+    article blockquote {
+      margin: 0 0 15px;
+    }
+
+    article ul,
+    article ol {
+      padding-left: 22px;
+    }
+
+    article li + li {
+      margin-top: 6px;
+    }
+
+    blockquote {
+      border-left: 4px solid var(--accent);
+      background: var(--accent-soft);
+      padding: 13px 16px;
+      border-radius: 0 8px 8px 0;
+      color: #31404d;
+    }
+
+    hr {
+      border: 0;
+      border-top: 1px solid var(--line);
+      margin: 26px 0;
+    }
+
+    strong { font-weight: 780; }
+
+    code {
+      border-radius: 6px;
+      background: #eef1f4;
+      padding: 2px 5px;
+      font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+      font-size: 0.92em;
+    }
+
+    .table-scroll {
+      width: 100%;
+      overflow-x: auto;
+      margin: 14px 0 18px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+    }
+
+    table {
+      width: 100%;
+      min-width: 720px;
+      border-collapse: collapse;
+      background: #fff;
+    }
+
+    th,
+    td {
+      padding: 10px 12px;
+      border-bottom: 1px solid var(--line);
+      border-right: 1px solid var(--line);
+      text-align: left;
+      vertical-align: top;
+      font-size: 14px;
+    }
+
+    th:last-child,
+    td:last-child {
+      border-right: 0;
+    }
+
+    tr:last-child td {
+      border-bottom: 0;
+    }
+
+    th {
+      background: #f2f5f7;
+      font-weight: 740;
+      color: #28323b;
+    }
+
+    @media (max-width: 900px) {
+      .layout {
+        display: block;
+      }
+
+      aside {
+        position: static;
+        height: auto;
+        border-right: 0;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .toc {
+        max-height: 260px;
+        overflow: auto;
+      }
+
+      main {
+        padding: 18px;
+      }
+
+      article {
+        padding: 20px;
+      }
+    }
+
+    @media (max-width: 560px) {
+      body { font-size: 15px; }
+
+      main {
+        padding: 14px;
+      }
+
+      article {
+        padding: 16px;
+      }
+
+      .hero h1 {
+        font-size: 29px;
+      }
+
+      article h2 {
+        font-size: 21px;
+      }
+
+      table {
+        min-width: 620px;
+      }
+
+      th,
+      td {
+        padding: 9px;
+      }
+    }
+
+    @media print {
+      aside,
+      .actions {
+        display: none !important;
+      }
+
+      .layout {
+        display: block;
+      }
+
+      main {
+        padding: 0;
+      }
+
+      article {
+        box-shadow: none;
+        border: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="layout">
+    <aside>
+      <div class="brand">
+        <strong>용산 재개발 보고서</strong>
+        <span>서계 · 청파 · 후암 비교 자료</span>
+      </div>
+      <div class="quick-links" aria-label="보고서 이동">
+        <a href="서계동_재개발_스터디_대시보드.html">대시보드</a>
+        <a href="서계동_재개발_조사보고서.html" aria-current="page">서계동</a>
+<a href="청파동_재개발_조사보고서.html">청파동</a>
+<a href="후암동_재개발_조사보고서.html">후암동</a>
+      </div>
+      <nav class="toc" aria-label="문서 목차">
+        <a class="level-2" href="#section-2">0. 조사 계획</a>
+<a class="level-2" href="#section-3">1. 사업 개요</a>
+<a class="level-2" href="#section-4">2. 추진 연혁 및 향후 일정</a>
+<a class="level-3" href="#section-5">과거 이력</a>
+<a class="level-3" href="#section-6">신통기획 재개발 추진 경과</a>
+<a class="level-3" href="#section-7">향후 계획 (조합 발표 기준, 변동 가능)</a>
+<a class="level-2" href="#section-8">3. 정비계획 및 사업성</a>
+<a class="level-3" href="#section-9">주택 공급 계획</a>
+<a class="level-3" href="#section-10">용적률 체계</a>
+<a class="level-3" href="#section-11">사업성 지표 (추정·변동 가능)</a>
+<a class="level-2" href="#section-12">4. 부동산 시세</a>
+<a class="level-3" href="#section-13">서계동 내 최근 실거래 (참고)</a>
+<a class="level-3" href="#section-14">용산구 전반 시세 맥락 (2025.12~2026.01 실거래 예시)</a>
+<a class="level-3" href="#section-15">시장 동향 (R-ONE, 2026.5 기준)</a>
+<a class="level-2" href="#section-16">5. 부동산 재개발 × AI 활용 레퍼런스</a>
+<a class="level-3" href="#section-17">국내 — 정비사업 직접 적용 사례</a>
+<a class="level-3" href="#section-18">해외 — 부동산 개발 단계별 AI 툴</a>
+<a class="level-3" href="#section-19">본 건에 적용 가능한 AI 활용 시나리오</a>
+<a class="level-2" href="#section-20">6. 주변 개발 호재</a>
+<a class="level-2" href="#section-21">7. 출처</a>
+      </nav>
+    </aside>
+    <main>
+      <header class="hero">
+        <div class="eyebrow">서계동 HTML 보고서</div>
+        <h1>용산 서계동 재개발 조사 보고서</h1>
+        <p>서계 통합구역의 공식 단계, 사업성, 실거래, 권리 리스크를 정리한 HTML 보고서</p>
+        <div class="actions">
+          <a class="button primary" href="서계동_재개발_스터디_대시보드.html">대시보드</a>
+          <a class="button" href="서계동_재개발_조사보고서.md">마크다운 원문</a>
+          <button class="button" type="button" onclick="window.print()">인쇄</button>
+        </div>
+      </header>
+      <article>
+<h1 id="section-1">용산 서계동(서계 통합구역) 재개발 종합 조사 보고서</h1>
+<blockquote>작성일: 2026년 6월 25일 · 대상지: 서울 용산구 서계동 33번지 일대(구역명 「서계 통합구역」)</blockquote>
+<hr>
+<h2 id="section-2">0. 조사 계획</h2>
+<p>이 보고서는 다음 4개 축으로 조사를 진행했다.</p>
+<div class="table-scroll"><table>
+<thead><tr>
+<th>단계</th>
+<th>조사 항목</th>
+<th>주요 출처</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>1. 사업 개요·연혁</td>
+<td>위치, 면적, 추진 배경, 정비 단계별 이력</td>
+<td>서울시 신통기획 아카이브, 정비업계 언론, 시 고시</td>
+</tr>
+<tr>
+<td>2. 정비계획·사업성</td>
+<td>세대수·평형, 용적률, 비례율, 분담금, 공사비·분양가</td>
+<td>위클리한국주택경제, 하우징워치, 하우징타임즈</td>
+</tr>
+<tr>
+<td>3. 부동산 시세</td>
+<td>서계동/용산구 실거래가, 시장 동향</td>
+<td>집품, 호갱노노, 서울부동산정보광장, R-ONE</td>
+</tr>
+<tr>
+<td>4. AI 활용 레퍼런스</td>
+<td>정비사업·부동산 개발에 AI를 접목한 국내외 사례·서비스</td>
+<td>부천도시공사, 국토부, 학술논문(KCI), 프롭테크</td>
+</tr>
+</tbody></table></div>
+<p><strong>추가로 직접 확인을 권장하는 1차 자료(데이터 정확도용)</strong></p>
+<ul>
+<li>서울시 정비사업 「정비사업 정보몽땅」(cleanup.seoul.go.kr) — 고시문·총회자료 원문</li>
+<li>토지이음(eum.go.kr) — 정비구역 지정 고시 원문(서울특별시 고시 제2025-188호)</li>
+<li>국토부 실거래가 공개시스템 / 서울부동산정보광장 — 서계동 번지별 실거래</li>
+<li>KB부동산·부동산플래닛 — 빌라/단독 시세 및 노후도</li>
+</ul>
+<hr>
+<h2 id="section-3">1. 사업 개요</h2>
+<p>서계동은 서울역에서 <strong>가장 가까운 주거지</strong>이지만, 경부선 지상철도로 서울역 동·서가 단절되고 최고 40m에 이르는 구릉지 단차 탓에 오랫동안 &#39;용산구의 슬럼&#39;으로 불려온 대표적 노후 저층주거지다. 대상지 내 노후주택 비율이 약 87%에 달한다.</p>
+<div class="table-scroll"><table>
+<thead><tr>
+<th>항목</th>
+<th>내용</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>위치</td>
+<td>용산구 서계동 33번지 일대</td>
+</tr>
+<tr>
+<td>구역명</td>
+<td>서계 통합구역 (주택정비형 재개발)</td>
+</tr>
+<tr>
+<td>면적</td>
+<td>약 112,953㎡ (자료에 따라 113,279㎡)</td>
+</tr>
+<tr>
+<td>토지등소유자</td>
+<td>약 1,900~1,962명</td>
+</tr>
+<tr>
+<td>사업방식</td>
+<td>신속통합기획(신통기획) 재개발</td>
+</tr>
+<tr>
+<td>입지</td>
+<td>1·4호선·경의중앙선·공항철도·KTX 서울역 서측 배후 주거지, 남산 N서울타워 조망 가능성</td>
+</tr>
+</tbody></table></div>
+<hr>
+<h2 id="section-4">2. 추진 연혁 및 향후 일정</h2>
+<h3 id="section-5">과거 이력</h3>
+<ul>
+<li><strong>2007년</strong> 뉴타운 후보지 지정 → <strong>2012년</strong> 도시 및 주거환경정비법 개정으로 무산</li>
+<li><strong>2017년</strong> 도시재생사업 추진 → <strong>2022년</strong> 사실상 실패로 종료</li>
+</ul>
+<h3 id="section-6">신통기획 재개발 추진 경과</h3>
+<ul>
+<li><strong>2022.10</strong> 신통기획 2차 후보지 신청 → <strong>2022.12.29</strong> 후보지 선정</li>
+<li><strong>2024.06</strong> 재개발 가이드라인 발표, 신통기획 확정</li>
+<li><strong>2025.04.10</strong> 정비구역 지정 및 정비계획 결정 고시 (서울특별시 고시 제2025-188호)</li>
+<li><strong>2025.09~11</strong> 추진위원장 선거 및 추진위원회 구성 승인 (동의율 77.2%)</li>
+<li><strong>2026.01.16</strong> 제1차 주민총회 — 정비업체 ㈜화성씨앤디 선정</li>
+<li><strong>2026.04.25</strong> <strong>조합설립 창립총회</strong> — 설계사 <strong>에이앤유디자인그룹</strong> 선정, 윤희화 조합장 선임(찬성률 97.29%)</li>
+</ul>
+<h3 id="section-7">향후 계획 (조합 발표 기준, 변동 가능)</h3>
+<ul>
+<li>조합설립 인가 → <strong>2026년 사업시행인가 목표</strong> → 시공사 선정 → 관리처분 → <strong>2031년 준공·입주 목표</strong></li>
+<li>시공사 관심: 삼성물산, GS건설, 대우건설, HDC현대산업개발 등 대형사 다수 수주의향 타진</li>
+</ul>
+<blockquote><strong>현재 단계 요약:</strong> 창립총회까지 완료, <strong>조합설립 인가를 앞둔 초기~중기 진입 국면.</strong> 정비사업 단계상 아직 사업시행인가·관리처분 전이므로 분담금·세대 구성 등 세부 수치는 확정 전 추정치다.</blockquote>
+<hr>
+<h2 id="section-8">3. 정비계획 및 사업성</h2>
+<h3 id="section-9">주택 공급 계획</h3>
+<ul>
+<li>최고 <strong>39층</strong>, 아파트 <strong>2,691세대</strong>(임대 582~588세대 포함) + 오피스텔 <strong>246실</strong></li>
+<li>부대복리시설 / 주차 3,682대(세대당 1.3대) / 건폐율 21.62%</li>
+</ul>
+<div class="table-scroll"><table>
+<thead><tr>
+<th>전용면적</th>
+<th>세대수</th>
+<th>(임대 포함)</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>39㎡</td>
+<td>513</td>
+<td>임대 280~284</td>
+</tr>
+<tr>
+<td>45㎡</td>
+<td>543</td>
+<td>임대 121</td>
+</tr>
+<tr>
+<td>59㎡</td>
+<td>887</td>
+<td>임대 120~121</td>
+</tr>
+<tr>
+<td>84㎡</td>
+<td>748</td>
+<td>임대 61~62</td>
+</tr>
+<tr>
+<td>오피스텔 35㎡</td>
+<td>246실</td>
+<td>단일평형</td>
+</tr>
+</tbody></table></div>
+<h3 id="section-10">용적률 체계</h3>
+<ul>
+<li>기준용적률 <strong>194.87%</strong> / 허용 <strong>209.29%</strong> / 상한 <strong>232%</strong> / 법적상한·적용 <strong>280.04%</strong></li>
+<li><strong>현황용적률 인정 첫 적용 구역</strong> — 2030 도시·주거환경정비기본계획상 신설 기준이 전국 최초로 적용되어 사업성이 대폭 개선. 시 추산 조합원 1인당 추정분담금 평균 <strong>약 3,200만원 감소</strong>.</li>
+</ul>
+<h3 id="section-11">사업성 지표 (추정·변동 가능)</h3>
+<div class="table-scroll"><table>
+<thead><tr>
+<th>항목</th>
+<th>수치</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>추정비례율</td>
+<td>96.2%(초기 설명회) → <strong>101.02%</strong>(정비계획 기준)</td>
+</tr>
+<tr>
+<td>총수입 추산</td>
+<td>약 2조 6,937억 원</td>
+</tr>
+<tr>
+<td>총지출 추산</td>
+<td>약 1조 3,819억 원</td>
+</tr>
+<tr>
+<td>평당 공사비</td>
+<td>약 750만 원</td>
+</tr>
+<tr>
+<td>예상 일반분양가</td>
+<td>평당 <strong>4,200~4,500만 원</strong> (인근 용산호반써밋·마포 신축 기준)</td>
+</tr>
+<tr>
+<td>조합원분양가</td>
+<td>일반분양가의 약 96% 수준</td>
+</tr>
+</tbody></table></div>
+<hr>
+<h2 id="section-12">4. 부동산 시세</h2>
+<blockquote>정비구역 내 매물은 &#39;입주권&#39; 성격이 강해 일반 매매와 가격 형성 논리가 다르다. 아래는 <strong>참고용 최근 실거래</strong>이며, 정확한 시세·프리미엄은 현지 중개업소와 실거래 원자료로 교차확인이 필요하다.</blockquote>
+<h3 id="section-13">서계동 내 최근 실거래 (참고)</h3>
+<div class="table-scroll"><table>
+<thead><tr>
+<th>유형</th>
+<th>주소</th>
+<th>면적</th>
+<th>거래가</th>
+<th>시점</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>아파트</td>
+<td>서계동 100-1 (청파로73길 36-7)</td>
+<td>22.02㎡</td>
+<td>3.7억</td>
+<td>2025.08</td>
+</tr>
+<tr>
+<td>오피스텔</td>
+<td>서계동 219-17 (만리재로 202)</td>
+<td>25.38㎡</td>
+<td>2.5억</td>
+<td>2025.12</td>
+</tr>
+<tr>
+<td>(호갱노노)</td>
+<td>서계동 일대</td>
+<td>약 15평</td>
+<td>약 2.77억</td>
+<td>시세 표기</td>
+</tr>
+</tbody></table></div>
+<h3 id="section-14">용산구 전반 시세 맥락 (2025.12~2026.01 실거래 예시)</h3>
+<ul>
+<li>효창동 84.94㎡ 17.7억 · 이촌동 59.88㎡ 16.2억 · 한강로3가 143.59㎡ 35.9억 · 도원동 59.94㎡ 14.1억</li>
+</ul>
+<h3 id="section-15">시장 동향 (R-ONE, 2026.5 기준)</h3>
+<ul>
+<li>전국 아파트 매매가격지수 변동률 <strong>+0.25%</strong>, 전세가격지수 <strong>+0.45%</strong> (상승세 지속)</li>
+<li>오피스텔 매매가격지수 <strong>-0.10%</strong> (약세)</li>
+</ul>
+<p><strong>시세 조회 직접 활용 가능한 사이트</strong></p>
+<ul>
+<li>서울부동산정보광장(land.seoul.go.kr) · 국토부 실거래가 공개시스템 · KB부동산(kbland.kr) · 호갱노노 · 부동산플래닛(노후도 확인) · 아파트봉(연립/빌라 실거래)</li>
+</ul>
+<hr>
+<h2 id="section-16">5. 부동산 재개발 × AI 활용 레퍼런스</h2>
+<h3 id="section-17">국내 — 정비사업 직접 적용 사례</h3>
+<ol>
+<li><strong>부천도시공사 AI 사업성 분석 서비스 (2026.4 도입)</strong></li>
+</ol>
+<ul>
+<li>정비사업 초기 단계 토지등소유자 대상 <strong>무료</strong> 컨설팅</li>
+<li>AI로 법규 검토·최대 용적률 설계·공사비 추정을 자동화 → 총사업비, 분양수입, 추정비례율, <strong>가구별 분담금(환급금) 시뮬레이션</strong> 제공</li>
+<li>*서계동처럼 초기 단계 구역의 사업성 사전검토에 가장 직접적으로 참고할 모델*</li>
+</ul>
+<ol>
+<li><strong>국토교통부 &#39;AI 기반 통합인허가 사전진단 서비스&#39; (2026.6 착수)</strong></li>
+</ol>
+<ul>
+<li>과기정통부 &#39;AI 민생 10대 프로젝트&#39; 선정 사업</li>
+<li>디지털트윈국토 공간정보 + AI 에이전트가 용도지역·건폐율·용적률·행위제한 등 200여 개 법령·조례 분석 → 필요한 인허가 종류·순서·소요기간을 맞춤 체크리스트로 안내</li>
+<li>민원 처리기간 30%↑ 단축, 연 75억 원 비용 절감 기대</li>
+</ul>
+<ol>
+<li><strong>스페이스워크 &#39;랜드북&#39; (학술 검증 사례, KCI 논문 2025)</strong></li>
+</ol>
+<ul>
+<li>웹 기반 프롭테크 플랫폼. 토지·건물 가치 자동 산정 + <strong>AI 건축 설계안 자동 생성</strong> + 임대·분양 수익 예측</li>
+<li>소규모 개발 타당성 분석에 활용 가능 (논문: 임혜연, 『미래기술융합논문지』 4(2), 2025)</li>
+</ul>
+<h3 id="section-18">해외 — 부동산 개발 단계별 AI 툴</h3>
+<ul>
+<li><strong>Zillow / Reonomy / Landis</strong> — 지역별 가격 변동 예측, 시장 동향 분석, 투자·구매 가능성 분석</li>
+<li><strong>PlanRadar / PermitRocket</strong> — 허가서류 작성·법규 준수 자동화, 인허가 절차 안내</li>
+<li><strong>SK AX 스마트건설</strong> — 설계 최적화·위험성 평가·생성형 AI 기반 디지털 전환 (글로벌 건설 AI 시장 2023년 39.3억$ → 2032년 226.8억$, 연 24.5% 성장 전망)</li>
+</ul>
+<h3 id="section-19">본 건에 적용 가능한 AI 활용 시나리오</h3>
+<ul>
+<li><strong>사업성 시뮬레이션:</strong> 용적률·공사비·분양가 변수에 따른 비례율/분담금 민감도 분석 (부천도시공사형)</li>
+<li><strong>설계 대안 생성:</strong> 39층·구릉지 단차 조건에서 배치·조망(남산) 최적화 (랜드북형)</li>
+<li><strong>인허가 리스크 사전진단:</strong> 통합 인허가 의제 검토 자동화 (국토부형)</li>
+<li><strong>시세·프리미엄 예측:</strong> 인근 신축(마포·용산) 실거래 데이터 기반 입주권 가치 추정</li>
+</ul>
+<hr>
+<h2 id="section-20">6. 주변 개발 호재</h2>
+<ul>
+<li><strong>서울역 북부역세권 복합개발</strong> (인접)</li>
+<li><strong>옛 국립극단 부지 복합문화공간 재건축</strong></li>
+<li><strong>용산정비창 개발</strong></li>
+<li><strong>GTX-A·B 노선</strong> 개통 시 서울역 교통허브 기능 강화</li>
+<li>우수 학군(청파초·소의초·봉래초·배문중·환일중 등) 및 용산·효창공원 접근성, 남산 조망·경관축 영향</li>
+</ul>
+<hr>
+<h2 id="section-21">7. 출처</h2>
+<ul>
+<li>시사투데이 「용산 서계동 재개발 사업 본격화」(2026.1) — sisatoday.co.kr</li>
+<li>서울시 신통기획 아카이브 「용산구 서계동 33 일대 재개발」 — news.seoul.go.kr/citybuild/archives/531217</li>
+<li>이데일리 「재개발 첫발 떼는 서계동」 — marketin.edaily.co.kr</li>
+<li>하우징워치 「추진위 체제 첫 총회」(2026.1), 「슬럼가 오명 벗을까」 — housingwatch.co.kr</li>
+<li>하우징타임즈 「추진위 승인」(2025.12), 인터뷰 — housingtimes.co.kr</li>
+<li>업다운뉴스 「조합 창립총회」(2026.4) — updownnews.co.kr</li>
+<li>위클리한국주택경제 「추정비례율 101.02%」, 「재공람」 — arunews.com</li>
+<li>집품 / 호갱노노 / 서울부동산정보광장 / R-ONE 부동산통계정보시스템</li>
+<li>다음뉴스 「부천도시공사 AI 사업성 분석」(2026.4) — v.daum.net</li>
+<li>전문건설신문 「AI 통합인허가 사전진단」(2026.6) — kscnews.co.kr</li>
+<li>KCI 「AI 기반 프롭테크 서비스 사례연구」(임혜연, 2025) — kci.go.kr</li>
+<li>SK AX 인사이트 「스마트 건설 AI 도입사례」 — skax.co.kr</li>
+</ul>
+<blockquote>⚠️ 본 보고서의 사업성·분담금·일정 수치는 <strong>사업시행인가 이전 추정치</strong>로, 향후 조합 진행 과정에서 변동된다. 투자·거래 판단 시 시 고시 원문과 조합 공식 자료, 현지 실거래를 반드시 교차확인할 것.</blockquote>
+      </article>
+    </main>
+  </div>
+</body>
+</html>

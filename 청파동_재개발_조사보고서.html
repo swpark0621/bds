@@ -1,0 +1,1085 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>용산 청파동 재개발 조사 보고서</title>
+  <style>
+    :root {
+      --bg: #f6f7f8;
+      --surface: #ffffff;
+      --ink: #20262d;
+      --muted: #69737d;
+      --line: #d8dde3;
+      --accent: #0f766e;
+      --accent-soft: color-mix(in srgb, var(--accent) 12%, white);
+      --shadow: 0 12px 30px rgba(32, 38, 45, 0.08);
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans KR", "Apple SD Gothic Neo", Arial, sans-serif;
+      font-size: 16px;
+      line-height: 1.7;
+      letter-spacing: 0;
+    }
+
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .layout {
+      display: grid;
+      grid-template-columns: 280px minmax(0, 1fr);
+      min-height: 100vh;
+    }
+
+    aside {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      padding: 22px 18px;
+      background: #fff;
+      border-right: 1px solid var(--line);
+      overflow: auto;
+    }
+
+    .brand {
+      display: grid;
+      gap: 5px;
+      margin-bottom: 16px;
+    }
+
+    .brand strong {
+      font-size: 18px;
+      line-height: 1.3;
+    }
+
+    .brand span {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .quick-links,
+    .toc {
+      display: grid;
+      gap: 7px;
+      margin-top: 16px;
+      padding-top: 16px;
+      border-top: 1px solid var(--line);
+    }
+
+    .quick-links a,
+    .toc a {
+      display: block;
+      border-radius: 8px;
+      padding: 8px 10px;
+      color: #34404a;
+      font-size: 14px;
+    }
+
+    .quick-links a {
+      border: 1px solid var(--line);
+      background: #fbfbfc;
+    }
+
+    .quick-links a[aria-current="page"] {
+      border-color: color-mix(in srgb, var(--accent) 46%, var(--line));
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    .toc a:hover,
+    .quick-links a:hover {
+      background: #eef2f5;
+      text-decoration: none;
+    }
+
+    .toc .level-3 {
+      padding-left: 22px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    main {
+      min-width: 0;
+      padding: 30px;
+    }
+
+    .hero {
+      max-width: 1120px;
+      margin: 0 auto 18px;
+      display: grid;
+      gap: 14px;
+    }
+
+    .eyebrow {
+      color: var(--accent);
+      font-weight: 760;
+      font-size: 13px;
+    }
+
+    .hero h1 {
+      margin: 0;
+      font-size: clamp(28px, 4vw, 44px);
+      line-height: 1.18;
+      letter-spacing: 0;
+    }
+
+    .hero p {
+      margin: 0;
+      color: var(--muted);
+      max-width: 840px;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 40px;
+      border-radius: 8px;
+      border: 1px solid var(--line);
+      background: var(--surface);
+      color: #2c3640;
+      padding: 0 12px;
+      font-size: 14px;
+      box-shadow: 0 2px 8px rgba(32, 38, 45, 0.05);
+    }
+
+    .button.primary {
+      border-color: var(--accent);
+      background: var(--accent);
+      color: #fff;
+    }
+
+    .button:hover {
+      text-decoration: none;
+      background: #f9fafb;
+    }
+
+    .button.primary:hover {
+      background: color-mix(in srgb, var(--accent) 88%, black);
+    }
+
+    article {
+      max-width: 1120px;
+      margin: 0 auto;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+      padding: 28px;
+    }
+
+    article h1 {
+      margin: 0 0 14px;
+      font-size: clamp(24px, 3vw, 34px);
+      line-height: 1.25;
+      letter-spacing: 0;
+    }
+
+    article h2 {
+      margin: 34px 0 12px;
+      padding-top: 10px;
+      border-top: 1px solid var(--line);
+      font-size: 24px;
+      line-height: 1.35;
+      letter-spacing: 0;
+    }
+
+    article h3 {
+      margin: 26px 0 10px;
+      font-size: 19px;
+      line-height: 1.4;
+      letter-spacing: 0;
+    }
+
+    article p,
+    article ul,
+    article ol,
+    article blockquote {
+      margin: 0 0 15px;
+    }
+
+    article ul,
+    article ol {
+      padding-left: 22px;
+    }
+
+    article li + li {
+      margin-top: 6px;
+    }
+
+    blockquote {
+      border-left: 4px solid var(--accent);
+      background: var(--accent-soft);
+      padding: 13px 16px;
+      border-radius: 0 8px 8px 0;
+      color: #31404d;
+    }
+
+    hr {
+      border: 0;
+      border-top: 1px solid var(--line);
+      margin: 26px 0;
+    }
+
+    strong { font-weight: 780; }
+
+    code {
+      border-radius: 6px;
+      background: #eef1f4;
+      padding: 2px 5px;
+      font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+      font-size: 0.92em;
+    }
+
+    .table-scroll {
+      width: 100%;
+      overflow-x: auto;
+      margin: 14px 0 18px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+    }
+
+    table {
+      width: 100%;
+      min-width: 720px;
+      border-collapse: collapse;
+      background: #fff;
+    }
+
+    th,
+    td {
+      padding: 10px 12px;
+      border-bottom: 1px solid var(--line);
+      border-right: 1px solid var(--line);
+      text-align: left;
+      vertical-align: top;
+      font-size: 14px;
+    }
+
+    th:last-child,
+    td:last-child {
+      border-right: 0;
+    }
+
+    tr:last-child td {
+      border-bottom: 0;
+    }
+
+    th {
+      background: #f2f5f7;
+      font-weight: 740;
+      color: #28323b;
+    }
+
+    @media (max-width: 900px) {
+      .layout {
+        display: block;
+      }
+
+      aside {
+        position: static;
+        height: auto;
+        border-right: 0;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .toc {
+        max-height: 260px;
+        overflow: auto;
+      }
+
+      main {
+        padding: 18px;
+      }
+
+      article {
+        padding: 20px;
+      }
+    }
+
+    @media (max-width: 560px) {
+      body { font-size: 15px; }
+
+      main {
+        padding: 14px;
+      }
+
+      article {
+        padding: 16px;
+      }
+
+      .hero h1 {
+        font-size: 29px;
+      }
+
+      article h2 {
+        font-size: 21px;
+      }
+
+      table {
+        min-width: 620px;
+      }
+
+      th,
+      td {
+        padding: 9px;
+      }
+    }
+
+    @media print {
+      aside,
+      .actions {
+        display: none !important;
+      }
+
+      .layout {
+        display: block;
+      }
+
+      main {
+        padding: 0;
+      }
+
+      article {
+        box-shadow: none;
+        border: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="layout">
+    <aside>
+      <div class="brand">
+        <strong>용산 재개발 보고서</strong>
+        <span>서계 · 청파 · 후암 비교 자료</span>
+      </div>
+      <div class="quick-links" aria-label="보고서 이동">
+        <a href="서계동_재개발_스터디_대시보드.html">대시보드</a>
+        <a href="서계동_재개발_조사보고서.html">서계동</a>
+<a href="청파동_재개발_조사보고서.html" aria-current="page">청파동</a>
+<a href="후암동_재개발_조사보고서.html">후암동</a>
+      </div>
+      <nav class="toc" aria-label="문서 목차">
+        <a class="level-2" href="#section-2">0. 조사 계획</a>
+<a class="level-2" href="#section-3">1. 결론 요약</a>
+<a class="level-2" href="#section-4">2. 구역별 공식 스냅샷</a>
+<a class="level-2" href="#section-5">3. 청파2구역</a>
+<a class="level-3" href="#section-6">3-1. 사업 개요</a>
+<a class="level-3" href="#section-7">3-2. 정비계획·사업성</a>
+<a class="level-3" href="#section-8">3-3. 추진 속도</a>
+<a class="level-3" href="#section-9">3-4. 장점과 리스크</a>
+<a class="level-2" href="#section-10">4. 청파제1구역</a>
+<a class="level-3" href="#section-11">4-1. 사업 개요</a>
+<a class="level-3" href="#section-12">4-2. 정비계획·수치 충돌</a>
+<a class="level-3" href="#section-13">4-3. 추진 속도와 시공자 이슈</a>
+<a class="level-3" href="#section-14">4-4. 장점과 리스크</a>
+<a class="level-2" href="#section-15">5. 서울역세권 청파동1가 46번지 일대</a>
+<a class="level-2" href="#section-16">6. 부동산 프리미엄 판단</a>
+<a class="level-2" href="#section-17">7. 권리·규제 체크</a>
+<a class="level-2" href="#section-18">8. 서계·후암과의 차이</a>
+<a class="level-2" href="#section-19">9. 다음 조사 과제</a>
+<a class="level-2" href="#section-20">10. 데이터·AI 활용 시나리오</a>
+<a class="level-2" href="#section-21">11. 출처</a>
+      </nav>
+    </aside>
+    <main>
+      <header class="hero">
+        <div class="eyebrow">청파동 HTML 보고서</div>
+        <h1>용산 청파동 재개발 조사 보고서</h1>
+        <p>청파2구역, 청파제1구역, 청파동1가 46번지 일대의 차이를 분리한 HTML 보고서</p>
+        <div class="actions">
+          <a class="button primary" href="서계동_재개발_스터디_대시보드.html">대시보드</a>
+          <a class="button" href="청파동_재개발_조사보고서.md">마크다운 원문</a>
+          <button class="button" type="button" onclick="window.print()">인쇄</button>
+        </div>
+      </header>
+      <article>
+<h1 id="section-1">용산 청파동 재개발 종합 조사 보고서</h1>
+<blockquote>작성일: 2026년 7월 3일<br>대상: 청파2구역, 청파제1구역, 서울역세권(청파동1가 46번지 일대) 도시정비형 재개발</blockquote>
+<hr>
+<h2 id="section-2">0. 조사 계획</h2>
+<p>청파동은 하나의 재개발 구역으로 보면 안 된다. 현재 투자·스터디 관점에서 의미 있는 사업은 다음 3개 축으로 나눠서 봐야 한다.</p>
+<div class="table-scroll"><table>
+<thead><tr>
+<th>구분</th>
+<th>조사 이유</th>
+<th>핵심 출처</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>청파2구역</td>
+<td>신속통합기획, 조합직접설립, 조합설립인가 완료로 최근 속도가 가장 빠른 비교군</td>
+<td>정비사업 정보몽땅, 서울시 신통기획, 위클리한국주택경제</td>
+</tr>
+<tr>
+<td>청파제1구역</td>
+<td>조합설립인가 단계는 오래전에 도달했으나 장기 지연 이력이 있는 선행 구역</td>
+<td>정비사업 정보몽땅, 용산구·언론 보도</td>
+</tr>
+<tr>
+<td>청파동1가 46 역세권</td>
+<td>주택정비형이 아니라 도시정비형·역세권 장기전세 성격이라 가격/권리 구조가 다름</td>
+<td>정비사업 정보몽땅, 서울시 도시계획위 보도</td>
+</tr>
+</tbody></table></div>
+<p>정리 기준은 다음과 같다.</p>
+<ol>
+<li>공식 단계는 정비사업 정보몽땅 사업장검색과 사업개요를 우선한다.</li>
+<li>조합설립인가일, 동의율, 시공자 선정 등 최신 이벤트는 언론 보도를 보조자료로 사용한다.</li>
+<li>세대수·면적·용적률이 출처별로 다르면 충돌값을 덮어쓰지 않고 별도 표시한다.</li>
+<li>서계동과의 비교에서는 <code>현재 단계 프리미엄</code>, <code>서울역 서측 입지 프리미엄</code>, <code>초기 진입 여지</code>를 나눠 판단한다.</li>
+</ol>
+<hr>
+<h2 id="section-3">1. 결론 요약</h2>
+<p>청파동 재개발의 핵심은 <strong>청파2구역</strong>이다. 청파2는 2026년 6월 23일 조합설립인가를 받으면서 서계 통합구역보다 공식 단계가 앞서게 됐다. 조합직접설립 방식으로 추진위원회 단계를 건너뛰었고, 동의율도 80% 이상으로 보도되어 속도 프리미엄이 강하다.</p>
+<p>다만 청파동 전체를 청파2 하나로 보면 안 된다. 청파1은 조합설립인가 상태지만 2005년 추진위 승인 이후 장기 지연 이력이 있고, 청파동1가 46번지 일대는 역세권 장기전세를 포함한 도시정비형 재개발이라 주택정비형 재개발과 권리·상품성이 다르다.</p>
+<div class="table-scroll"><table>
+<thead><tr>
+<th>판단 항목</th>
+<th>우세 구역</th>
+<th>이유</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>현재 인허가 단계</td>
+<td>청파2·청파1</td>
+<td>조합설립인가 단계 확인</td>
+</tr>
+<tr>
+<td>최근 속도</td>
+<td>청파2</td>
+<td>조합직접설립, 인가 신청 후 단기간 승인 보도</td>
+</tr>
+<tr>
+<td>서울역 서측 확장성</td>
+<td>청파2·청파동1가46</td>
+<td>서계·청파·서울역세권 연계 개발축</td>
+</tr>
+<tr>
+<td>사업 안정성</td>
+<td>청파2</td>
+<td>구역면적·세대수·조합설립인가가 비교적 명확</td>
+</tr>
+<tr>
+<td>장기 리스크</td>
+<td>청파1</td>
+<td>단계는 앞서나 장기 지연 이력과 수치 변경 가능성</td>
+</tr>
+<tr>
+<td>권리구조 주의</td>
+<td>청파동1가46</td>
+<td>도시정비형·장기전세 포함, 일반 재개발 입주권과 다름</td>
+</tr>
+</tbody></table></div>
+<hr>
+<h2 id="section-4">2. 구역별 공식 스냅샷</h2>
+<div class="table-scroll"><table>
+<thead><tr>
+<th>항목</th>
+<th>청파2구역</th>
+<th>청파제1구역</th>
+<th>청파동1가 46 역세권</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>사업유형</td>
+<td>재개발(주택정비형)</td>
+<td>재개발(주택정비형)</td>
+<td>재개발(도시정비형)</td>
+</tr>
+<tr>
+<td>위치</td>
+<td>청파동1가 89-18 일대</td>
+<td>청파동2가 11-1 일대</td>
+<td>청파동1가 46 일대</td>
+</tr>
+<tr>
+<td>공식 단계</td>
+<td>조합설립인가</td>
+<td>조합설립인가</td>
+<td>추진위원회승인</td>
+</tr>
+<tr>
+<td>면적</td>
+<td>82,558.4㎡</td>
+<td>32,619.8㎡</td>
+<td>19,771.5㎡ 보도</td>
+</tr>
+<tr>
+<td>토지등소유자</td>
+<td>1,408명</td>
+<td>460명</td>
+<td>정보몽땅 사업개요 추가 확인 필요</td>
+</tr>
+<tr>
+<td>조합원 수</td>
+<td>1,405명</td>
+<td>458명</td>
+<td>추진위 단계</td>
+</tr>
+<tr>
+<td>세대수</td>
+<td>1,905세대</td>
+<td>626~697세대 충돌</td>
+<td>741세대</td>
+</tr>
+<tr>
+<td>핵심 차이</td>
+<td>신통기획+직접조합설립</td>
+<td>오래된 조합 단계</td>
+<td>역세권 장기전세·도시정비형</td>
+</tr>
+</tbody></table></div>
+<hr>
+<h2 id="section-5">3. 청파2구역</h2>
+<h3 id="section-6">3-1. 사업 개요</h3>
+<p>청파2구역은 청파동 재개발 중 현재 가장 중요한 구역이다. 서울역 서측 주거지 정비축에서 서계 통합구역과 가장 직접적으로 비교된다.</p>
+<div class="table-scroll"><table>
+<thead><tr>
+<th>항목</th>
+<th>내용</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>정비구역 명칭</td>
+<td>청파제2구역주택재개발정비사업</td>
+</tr>
+<tr>
+<td>사업구분</td>
+<td>재개발(주택정비형)</td>
+</tr>
+<tr>
+<td>위치</td>
+<td>용산구 청파동1가 89-18 일대</td>
+</tr>
+<tr>
+<td>공공지원</td>
+<td>대상</td>
+</tr>
+<tr>
+<td>추진위 수행 여부</td>
+<td>N, 조합직접설립 방식</td>
+</tr>
+<tr>
+<td>면적</td>
+<td>82,558.4㎡</td>
+</tr>
+<tr>
+<td>토지등소유자</td>
+<td>1,408명</td>
+</tr>
+<tr>
+<td>조합원</td>
+<td>1,405명</td>
+</tr>
+<tr>
+<td>공식 단계</td>
+<td>조합설립인가</td>
+</tr>
+</tbody></table></div>
+<h3 id="section-7">3-2. 정비계획·사업성</h3>
+<div class="table-scroll"><table>
+<thead><tr>
+<th>항목</th>
+<th>내용</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>계획 세대수</td>
+<td>1,905세대</td>
+</tr>
+<tr>
+<td>분양 세대</td>
+<td>1,498세대</td>
+</tr>
+<tr>
+<td>임대 세대</td>
+<td>407세대</td>
+</tr>
+<tr>
+<td>60㎡ 이하 분양</td>
+<td>986세대</td>
+</tr>
+<tr>
+<td>60~85㎡ 분양</td>
+<td>417세대</td>
+</tr>
+<tr>
+<td>85㎡ 초과 분양</td>
+<td>95세대</td>
+</tr>
+<tr>
+<td>용적률</td>
+<td>약 250%</td>
+</tr>
+<tr>
+<td>최고층</td>
+<td>지상 25층</td>
+</tr>
+<tr>
+<td>기존 건축물 철거 후 신축</td>
+<td>453동</td>
+</tr>
+</tbody></table></div>
+<h3 id="section-8">3-3. 추진 속도</h3>
+<ul>
+<li>2021년 신속통합기획 후보지 선정</li>
+<li>2024년 10월 31일 정비구역 지정 보도</li>
+<li>2025년 5월 조합직접설립 공공지원 용역 공고</li>
+<li>2026년 5월 창립총회 보도</li>
+<li>2026년 6월 23일 조합설립인가 보도</li>
+</ul>
+<p>청파2의 핵심은 <strong>조합직접설립</strong>이다. 추진위원회 단계를 생략했기 때문에 서계나 후암권보다 체감 속도가 빠르게 보인다. 조합설립인가 직후 정비계획 변경을 추진해 2030 도시·주거환경정비기본계획에 맞춰 사업성을 개선하겠다는 보도도 있다.</p>
+<h3 id="section-9">3-4. 장점과 리스크</h3>
+<div class="table-scroll"><table>
+<thead><tr>
+<th>구분</th>
+<th>내용</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>장점</td>
+<td>공식 단계가 조합설립인가까지 올라와 있다.</td>
+</tr>
+<tr>
+<td>장점</td>
+<td>서울역·남영역·숙대입구역 접근성이 모두 작동한다.</td>
+</tr>
+<tr>
+<td>장점</td>
+<td>1,905세대 대단지이며 서계와 함께 서울역 서측 신축 주거축을 형성한다.</td>
+</tr>
+<tr>
+<td>장점</td>
+<td>동의율 80% 이상 보도로 주민 추진력이 강하다.</td>
+</tr>
+<tr>
+<td>리스크</td>
+<td>이미 속도 프리미엄이 가격에 반영됐을 가능성이 크다.</td>
+</tr>
+<tr>
+<td>리스크</td>
+<td>정비계획 변경 과정에서 세대수·용적률·공공기여 조건이 조정될 수 있다.</td>
+</tr>
+<tr>
+<td>리스크</td>
+<td>조합설립인가 이후 협력업체 선정, 시공자 선정, 사업시행인가까지 추가 검증이 필요하다.</td>
+</tr>
+</tbody></table></div>
+<hr>
+<h2 id="section-10">4. 청파제1구역</h2>
+<h3 id="section-11">4-1. 사업 개요</h3>
+<p>청파1구역은 청파2보다 오래된 구역이다. 공식 단계는 조합설립인가로 앞서 있으나, 추진위 승인 이후 조합설립까지 시간이 오래 걸린 장기 지연 이력이 있다.</p>
+<div class="table-scroll"><table>
+<thead><tr>
+<th>항목</th>
+<th>내용</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>정비구역 명칭</td>
+<td>청파제1구역 재개발정비사업조합</td>
+</tr>
+<tr>
+<td>사업구분</td>
+<td>재개발(주택정비형)</td>
+</tr>
+<tr>
+<td>위치</td>
+<td>용산구 청파동2가 11-1 일대</td>
+</tr>
+<tr>
+<td>공공지원</td>
+<td>비대상</td>
+</tr>
+<tr>
+<td>추진위 수행 여부</td>
+<td>Y</td>
+</tr>
+<tr>
+<td>면적</td>
+<td>32,619.8㎡</td>
+</tr>
+<tr>
+<td>토지등소유자</td>
+<td>460명</td>
+</tr>
+<tr>
+<td>조합원</td>
+<td>458명</td>
+</tr>
+<tr>
+<td>공식 단계</td>
+<td>조합설립인가</td>
+</tr>
+</tbody></table></div>
+<h3 id="section-12">4-2. 정비계획·수치 충돌</h3>
+<p>정비사업 정보몽땅 사업개요 기준으로는 공급계획이 다음처럼 읽힌다.</p>
+<div class="table-scroll"><table>
+<thead><tr>
+<th>구분</th>
+<th>60㎡ 이하</th>
+<th>60~85㎡</th>
+<th>85㎡ 초과</th>
+<th>합계</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>분양</td>
+<td>310</td>
+<td>183</td>
+<td>88</td>
+<td>581</td>
+</tr>
+<tr>
+<td>임대</td>
+<td>93</td>
+<td>19</td>
+<td>4</td>
+<td>116</td>
+</tr>
+<tr>
+<td>합계</td>
+<td>403</td>
+<td>202</td>
+<td>92</td>
+<td>697</td>
+</tr>
+</tbody></table></div>
+<p>다만 최근 시공사 관련 보도에서는 청파1구역을 <strong>626세대, 공공임대 101세대 포함</strong>으로 설명한다. 따라서 현재 단계에서는 697세대를 단정하지 않고, 정비계획 변경·사업시행인가 자료에서 최종 확인해야 한다.</p>
+<div class="table-scroll"><table>
+<thead><tr>
+<th>항목</th>
+<th>정보몽땅 기준</th>
+<th>최근 보도 기준</th>
+<th>판단</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>총세대수</td>
+<td>697세대</td>
+<td>626세대</td>
+<td>충돌, 원문 변경 확인 필요</td>
+</tr>
+<tr>
+<td>임대세대</td>
+<td>116세대</td>
+<td>101세대</td>
+<td>충돌</td>
+</tr>
+<tr>
+<td>최고층</td>
+<td>25층</td>
+<td>25층</td>
+<td>일치</td>
+</tr>
+<tr>
+<td>동수</td>
+<td>공식 표는 세부 확인 필요</td>
+<td>10개동 보도</td>
+<td>확인 필요</td>
+</tr>
+</tbody></table></div>
+<h3 id="section-13">4-3. 추진 속도와 시공자 이슈</h3>
+<ul>
+<li>2005년 8월 12일 추진위원회 승인</li>
+<li>2023년 2월 17일 조합설립인가</li>
+<li>2025년 이후 시공자 선정 절차 보도</li>
+<li>대우건설 <code>써밋</code> 수의계약 수순 보도</li>
+</ul>
+<p>청파1은 단계만 보면 청파2와 함께 서계보다 앞서 있다. 그러나 추진위 승인 후 조합설립인가까지 약 18년이 걸렸기 때문에, <strong>단계 프리미엄은 있으나 속도 프리미엄은 청파2보다 낮게 보는 것이 타당</strong>하다.</p>
+<h3 id="section-14">4-4. 장점과 리스크</h3>
+<div class="table-scroll"><table>
+<thead><tr>
+<th>구분</th>
+<th>내용</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>장점</td>
+<td>조합설립인가가 이미 완료됐다.</td>
+</tr>
+<tr>
+<td>장점</td>
+<td>남영역·숙대입구역 사이 입지, 청파로 접근성, 학군 수요가 있다.</td>
+</tr>
+<tr>
+<td>장점</td>
+<td>구역 규모가 작아 의사결정 단위가 청파2·서계보다 가볍다.</td>
+</tr>
+<tr>
+<td>장점</td>
+<td>대형 건설사 하이엔드 브랜드 적용 가능성이 보도됐다.</td>
+</tr>
+<tr>
+<td>리스크</td>
+<td>장기 지연 이력이 있어 속도 판단은 보수적으로 봐야 한다.</td>
+</tr>
+<tr>
+<td>리스크</td>
+<td>세대수·공공임대 수치가 출처별로 다르다.</td>
+</tr>
+<tr>
+<td>리스크</td>
+<td>시공자 선정과 공사비 3.3㎡당 929만원 보도는 조합원 부담 민감도를 키울 수 있다.</td>
+</tr>
+</tbody></table></div>
+<hr>
+<h2 id="section-15">5. 서울역세권 청파동1가 46번지 일대</h2>
+<p>이 구역은 청파동에 있지만 청파1·청파2와 같은 주택정비형 재개발로 묶으면 안 된다. 정비사업 정보몽땅 사업장검색에서는 <code>서울역세권(청파동1가 46번지 일대) 도시정비형 재개발정비사업</code>으로 표시된다.</p>
+<div class="table-scroll"><table>
+<thead><tr>
+<th>항목</th>
+<th>내용</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>사업구분</td>
+<td>재개발(도시정비형)</td>
+</tr>
+<tr>
+<td>위치</td>
+<td>청파동1가 46번지 일대</td>
+</tr>
+<tr>
+<td>공식 단계</td>
+<td>추진위원회승인</td>
+</tr>
+<tr>
+<td>면적</td>
+<td>19,771.5㎡ 보도</td>
+</tr>
+<tr>
+<td>계획</td>
+<td>지하 5층~지상 29층, 8개동</td>
+</tr>
+<tr>
+<td>세대수</td>
+<td>741세대</td>
+</tr>
+<tr>
+<td>공공임대</td>
+<td>336세대</td>
+</tr>
+<tr>
+<td>장기전세</td>
+<td>189세대</td>
+</tr>
+</tbody></table></div>
+<p>이 사업은 서울역세권 배후의 도심 주거복합단지 성격이 강하다. 역세권 장기전세와 공공임대 비중이 높으므로, 일반 재개발 입주권 프리미엄과 같은 방식으로 비교하면 안 된다.</p>
+<hr>
+<h2 id="section-16">6. 부동산 프리미엄 판단</h2>
+<p>청파동의 프리미엄은 세 가지로 나뉜다.</p>
+<div class="table-scroll"><table>
+<thead><tr>
+<th>프리미엄 유형</th>
+<th>우세 구역</th>
+<th>해석</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>속도·확정성 프리미엄</td>
+<td>청파2</td>
+<td>조합설립인가 완료, 직접설립 방식</td>
+</tr>
+<tr>
+<td>브랜드·시공자 프리미엄</td>
+<td>청파1</td>
+<td>대우건설 써밋 보도, 단 실제 계약 확정 전 확인 필요</td>
+</tr>
+<tr>
+<td>서울역 서측 확장 프리미엄</td>
+<td>청파2·청파동1가46</td>
+<td>서계·청파·서울역세권 연계 개발</td>
+</tr>
+<tr>
+<td>초기 진입 여지</td>
+<td>청파동1가46</td>
+<td>추진위 단계이나 권리구조가 다름</td>
+</tr>
+<tr>
+<td>안정성 대비 상방</td>
+<td>청파2</td>
+<td>단계와 규모가 모두 받쳐줌</td>
+</tr>
+</tbody></table></div>
+<p>서계와 비교하면, 청파2는 <strong>현재 확정성 프리미엄</strong>이 우세하고 서계는 <strong>미래 대단지·랜드마크 프리미엄</strong>이 더 클 수 있다. 청파1은 공식 단계는 앞서지만 장기 지연 이력이 있어 속도 프리미엄은 낮게 봐야 한다.</p>
+<hr>
+<h2 id="section-17">7. 권리·규제 체크</h2>
+<div class="table-scroll"><table>
+<thead><tr>
+<th>항목</th>
+<th>청파2</th>
+<th>청파1</th>
+<th>청파동1가46</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>토지거래허가</td>
+<td>신통기획·정비구역 여부별 확인</td>
+<td>정비구역별 확인</td>
+<td>역세권·도시정비형 기준 별도 확인</td>
+</tr>
+<tr>
+<td>권리산정기준일</td>
+<td>후보지·정비구역 지정 관련 고시 확인</td>
+<td>구역 지정 고시 및 조합 자료 확인</td>
+<td>장기전세·도시정비형 기준 확인</td>
+</tr>
+<tr>
+<td>조합원 지위양도</td>
+<td>관리처분인가 전후 제한 확인</td>
+<td>조합설립인가 이후 단계 관리 필요</td>
+<td>사업방식별 별도 검토</td>
+</tr>
+<tr>
+<td>분양대상</td>
+<td>다물권자·지분쪼개기·토지/건물 분리 확인</td>
+<td>동일</td>
+<td>도시정비형 권리 구조 확인</td>
+</tr>
+<tr>
+<td>세입자·명도</td>
+<td>후보 매물별 확인</td>
+<td>후보 매물별 확인</td>
+<td>후보 매물별 확인</td>
+</tr>
+</tbody></table></div>
+<p>청파동 물건을 볼 때는 같은 <code>청파동</code>이라는 지명보다 <strong>어느 구역의 물건인지</strong>가 더 중요하다. 청파2의 기대감으로 청파동1가46 또는 구역 밖 물건을 잘못 사면 프리미엄 논리가 완전히 달라진다.</p>
+<hr>
+<h2 id="section-18">8. 서계·후암과의 차이</h2>
+<div class="table-scroll"><table>
+<thead><tr>
+<th>비교</th>
+<th>청파동의 차이</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>서계 대비</td>
+<td>청파2는 공식 단계가 앞서고 확정성 프리미엄이 강하다. 서계는 규모·상징성 프리미엄이 더 클 수 있다.</td>
+</tr>
+<tr>
+<td>후암 대비</td>
+<td>청파는 남산 경관·고도 변수보다 서울역 서측 역세권·생활권 프리미엄이 강하다.</td>
+</tr>
+<tr>
+<td>청파 내부</td>
+<td>청파2는 속도, 청파1은 단계 선행·브랜드 가능성, 청파동1가46은 역세권 도시정비형이다.</td>
+</tr>
+<tr>
+<td>투자 판단</td>
+<td>청파2 가격이 서계보다 얼마나 비싼지, 대지지분 단가로 비교해야 한다.</td>
+</tr>
+</tbody></table></div>
+<hr>
+<h2 id="section-19">9. 다음 조사 과제</h2>
+<div class="table-scroll"><table>
+<thead><tr>
+<th>우선순위</th>
+<th>작업</th>
+<th>목적</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>상</td>
+<td>청파2 조합설립인가 고시·인가서 원문 확보</td>
+<td>언론 보도와 공식 인가일 대조</td>
+</tr>
+<tr>
+<td>상</td>
+<td>청파2 정비계획 변경 착수 자료 확인</td>
+<td>2030 기본계획 반영에 따른 세대수·용적률 변동 추적</td>
+</tr>
+<tr>
+<td>상</td>
+<td>청파1 사업시행인가 준비 자료 확인</td>
+<td>장기 지연 구간에서 실제 진척 여부 확인</td>
+</tr>
+<tr>
+<td>중</td>
+<td>청파1 세대수 697 vs 626 충돌 원문 확인</td>
+<td>투자판단용 사업성 수치 확정</td>
+</tr>
+<tr>
+<td>중</td>
+<td>청파동1가46 권리구조 확인</td>
+<td>도시정비형·장기전세 사업의 매물 검토 기준 분리</td>
+</tr>
+<tr>
+<td>중</td>
+<td>청파동1가·청파동2가 최근 24개월 실거래 수집</td>
+<td>서계 실거래와 대지지분 단가 비교</td>
+</tr>
+</tbody></table></div>
+<hr>
+<h2 id="section-20">10. 데이터·AI 활용 시나리오</h2>
+<p>청파동은 구역별 성격이 달라 데이터 정규화가 중요하다. 같은 <code>청파동</code> 거래라도 청파2, 청파1, 청파동1가46, 구역 밖 물건을 섞으면 프리미엄 판단이 왜곡된다.</p>
+<div class="table-scroll"><table>
+<thead><tr>
+<th>활용 영역</th>
+<th>방법</th>
+<th>산출물</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>공식단계 추적</td>
+<td>정보몽땅 사업장검색 월 1회 스냅샷</td>
+<td>청파1·2·46번지 단계 변경 로그</td>
+</tr>
+<tr>
+<td>실거래 정규화</td>
+<td>청파동1가·청파동2가 24개월 거래를 지번·대지권 기준으로 정리</td>
+<td>구역별 대지단가, 건물단가, 거래건수</td>
+</tr>
+<tr>
+<td>프리미엄 분리</td>
+<td>조합설립인가 전후 거래와 구역 밖 거래를 비교</td>
+<td>단계 프리미엄 추정표</td>
+</tr>
+<tr>
+<td>수치 충돌 관리</td>
+<td>세대수 697 vs 626 등 출처별 수치 보존</td>
+<td>출처별 수치 충돌표</td>
+</tr>
+<tr>
+<td>매물 필터링</td>
+<td>후보 매물 지번을 정비구역·권리산정기준일·토허제와 대조</td>
+<td>매수 후보/제외 목록</td>
+</tr>
+</tbody></table></div>
+<hr>
+<h2 id="section-21">11. 출처</h2>
+<ul>
+<li>정비사업 정보몽땅 청파2 사업개요: <a href="https://cleanup.seoul.go.kr/cafe/mastr-cleanup-bsnsSumry/execute.do?cafeId=170900000973k24&amp;div=sumry&amp;stepSeCode=102" target="_blank" rel="noopener noreferrer">https://cleanup.seoul.go.kr/cafe/mastr-cleanup-bsnsSumry/execute.do?cafeId=170900000973k24&amp;div=sumry&amp;stepSeCode=102</a></li>
+<li>정비사업 정보몽땅 청파1 사업개요: <a href="https://cleanup.seoul.go.kr/cafe/mastr-cleanup-bsnsSumry/execute.do?cafeId=170100003006Y71&amp;div=sumry&amp;stepSeCode=102" target="_blank" rel="noopener noreferrer">https://cleanup.seoul.go.kr/cafe/mastr-cleanup-bsnsSumry/execute.do?cafeId=170100003006Y71&amp;div=sumry&amp;stepSeCode=102</a></li>
+<li>정비사업 정보몽땅 용산구 사업장검색: <a href="https://cleanup.seoul.go.kr/cleanup/bsnssttus/lscrMainIndx.do?scupBsnsSttus.signguCode=11170" target="_blank" rel="noopener noreferrer">https://cleanup.seoul.go.kr/cleanup/bsnssttus/lscrMainIndx.do?scupBsnsSttus.signguCode=11170</a></li>
+<li>서울시 신속통합기획 청파2: <a href="https://news.seoul.go.kr/citybuild/archives/531221" target="_blank" rel="noopener noreferrer">https://news.seoul.go.kr/citybuild/archives/531221</a></li>
+<li>위클리한국주택경제 청파2 조합설립인가: <a href="https://www.arunews.com/news/articleView.html?idxno=64196" target="_blank" rel="noopener noreferrer">https://www.arunews.com/news/articleView.html?idxno=64196</a></li>
+<li>위클리한국주택경제 청파2 직접조합설립 추진: <a href="https://www.arunews.com/news/articleView.html?idxno=48648" target="_blank" rel="noopener noreferrer">https://www.arunews.com/news/articleView.html?idxno=48648</a></li>
+<li>연합뉴스 청파1 조합설립인가 추진: <a href="https://www.yna.co.kr/view/AKR20230126072500004" target="_blank" rel="noopener noreferrer">https://www.yna.co.kr/view/AKR20230126072500004</a></li>
+<li>디벨로퍼뉴스 청파1 시공사 보도: <a href="https://www.dpnews.co.kr/news/articleView.html?idxno=768" target="_blank" rel="noopener noreferrer">https://www.dpnews.co.kr/news/articleView.html?idxno=768</a></li>
+<li>위클리한국주택경제 청파동1가46 도시정비형 보도: <a href="https://www.arunews.com/news/articleView.html?idxno=48675" target="_blank" rel="noopener noreferrer">https://www.arunews.com/news/articleView.html?idxno=48675</a></li>
+<li>정비사업 정보몽땅 신속통합기획 진행사항: <a href="https://cleanup.seoul.go.kr/cleanup/view/publicIntgrPlanSttn.do" target="_blank" rel="noopener noreferrer">https://cleanup.seoul.go.kr/cleanup/view/publicIntgrPlanSttn.do</a></li>
+</ul>
+<blockquote>주의: 본 보고서는 2026년 7월 3일 기준 공개자료·보도자료를 교차 정리한 스터디 문서다. 실제 매수 판단 전에는 후보 매물의 지번, 정비구역 포함 여부, 권리산정기준일, 조합원 지위양도 제한, 세입자 상태를 별도로 확인해야 한다.</blockquote>
+      </article>
+    </main>
+  </div>
+</body>
+</html>
