@@ -29,6 +29,14 @@ const reports = [
     description: '동후암1구역, 동후암3구역, 후암동제1구역 참고군을 비교한 HTML 보고서',
     accent: '#b7791f',
   },
+  {
+    source: '서계통합_청파2_비교_실거래_프리미엄_보고서.md',
+    output: '서계통합_청파2_비교_실거래_프리미엄_보고서.html',
+    title: '용산 서계 통합·청파2 비교 및 실거래 프리미엄 보고서',
+    shortTitle: '서계·청파2',
+    description: '조합설립인가 이후의 사업 비교와 실거래 기반 기대감 프리미엄을 같은 기준으로 정리한 HTML 보고서',
+    accent: '#9a3412',
+  },
 ];
 
 function escapeHtml(value) {
