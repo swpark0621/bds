@@ -389,11 +389,15 @@
 <a class="level-3" href="#section-11">5-2. 순환정비 방식</a>
 <a class="level-3" href="#section-12">5-3. 고도제한·설계변경 변수</a>
 <a class="level-2" href="#section-13">6. 숫자 충돌과 자료 우선순위</a>
-<a class="level-2" href="#section-14">7. 개별 매물 검토 체크리스트</a>
-<a class="level-3" href="#section-15">7-1. 권리와 가격을 분리해서 보기</a>
-<a class="level-3" href="#section-16">7-2. 프리미엄의 올바른 계산</a>
-<a class="level-2" href="#section-17">8. 다음 조사 작업</a>
-<a class="level-2" href="#section-18">9. 주요 원문 출처</a>
+<a class="level-2" href="#section-14">7. 실거래·호가 스냅샷 (2026-09-02)</a>
+<a class="level-3" href="#section-15">7-1. 실거래 신고 표본</a>
+<a class="level-3" href="#section-16">7-2. 현 호가와 네이버부동산 확인 범위</a>
+<a class="level-3" href="#section-17">7-3. 프리미엄 계산의 결론</a>
+<a class="level-2" href="#section-18">8. 개별 매물 검토 체크리스트</a>
+<a class="level-3" href="#section-19">8-1. 권리와 가격을 분리해서 보기</a>
+<a class="level-3" href="#section-20">8-2. 프리미엄의 올바른 계산</a>
+<a class="level-2" href="#section-21">9. 다음 조사 작업</a>
+<a class="level-2" href="#section-22">10. 주요 원문 출처</a>
       </nav>
     </aside>
     <main>
@@ -768,8 +772,75 @@
 </tbody></table></div>
 <p>자료 우선순위는 <code>법정 고시·인가 원문</code> &gt; <code>시행자 LH 최신 현황·공식 보도</code> &gt; <code>시공사 공식 발표</code> &gt; <code>언론·중개 플랫폼</code> 순서로 둔다. 사업 단계는 반드시 첫 번째 또는 두 번째 출처에서 확인한다.</p>
 <hr>
-<h2 id="section-14">7. 개별 매물 검토 체크리스트</h2>
-<h3 id="section-15">7-1. 권리와 가격을 분리해서 보기</h3>
+<h2 id="section-14">7. 실거래·호가 스냅샷 (2026-09-02)</h2>
+<h3 id="section-15">7-1. 실거래 신고 표본</h3>
+<p>아래 수치는 재개발닷컴이 공개한 구역별 <code>property-transactions</code> 응답을 2025-09-01~2026-08-31로 필터한 뒤, <strong>계약일이 최신인 20건씩</strong>을 정규화한 결과다. 거래가·대지면적·공시가격은 원자료에 있는 값으로 계산했고, 계약 전에는 반드시 국토교통부 실거래가 공개시스템에서 주소·계약일·취소 여부를 다시 확인해야 한다. 이 표본은 시장 수준을 가늠하기 위한 것이지, 개별 매물의 재개발 프리미엄을 확정하는 자료는 아니다.</p>
+<div class="table-scroll"><table>
+<thead><tr>
+<th>구역</th>
+<th>표본 계약일</th>
+<th>건수</th>
+<th>거래가 중앙값</th>
+<th>대지평당 거래가 중앙값</th>
+<th>대지평당 거래가 평균</th>
+<th>해석</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>신흥1구역</td>
+<td>2026-07-10~2026-08-16</td>
+<td>20건</td>
+<td>9.55억원</td>
+<td>4,796.7만원/평</td>
+<td>4,984.5만원/평</td>
+<td>단독·다가구 중심. 표본 중앙값 기준으로 신흥3보다 약 7.1% 높음</td>
+</tr>
+<tr>
+<td>신흥3구역</td>
+<td>2026-05-21~2026-08-08</td>
+<td>20건</td>
+<td>9.03억원</td>
+<td>4,480.1만원/평</td>
+<td>4,896.8만원/평</td>
+<td>단독·다가구 중심이나 다세대 고단가 표본이 섞여 평균이 중앙값보다 높음</td>
+</tr>
+</tbody></table></div>
+<p><strong>읽는 법:</strong> 동일 구역 안에서도 단독·다가구와 다세대는 대지권 구조가 달라 대지평당가가 직접 비교되지 않는다. 이번 최신 표본의 중앙값은 신흥1이 높지만, 평균 차이는 약 1.8% 수준이다. 따라서 이 표만으로 “신흥1의 재개발 프리미엄이 더 크다”라고 결론내릴 수 없고, 후보 물건의 대지지분·임차보증금·분양자격·권리가액을 맞춘 비교가 필요하다.</p>
+<h3 id="section-16">7-2. 현 호가와 네이버부동산 확인 범위</h3>
+<div class="table-scroll"><table>
+<thead><tr>
+<th>구역</th>
+<th>공개 호가 수</th>
+<th>최저 호가</th>
+<th>중앙 호가</th>
+<th>최고 호가</th>
+<th>출처·한계</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>신흥1구역</td>
+<td>77건</td>
+<td>8.0억원</td>
+<td>10.0억원</td>
+<td>16.0억원</td>
+<td>재개발닷컴 공개 호가 스냅샷. 호가는 체결가가 아니며, 대지면적 비공개 행이 많아 평당 호가 산출 제외</td>
+</tr>
+<tr>
+<td>신흥3구역</td>
+<td>20건</td>
+<td>4.9억원</td>
+<td>9.9억원</td>
+<td>17.5억원</td>
+<td>재개발닷컴 공개 호가 스냅샷. 최저 호가만으로 구역 가격을 대표시키면 안 됨</td>
+</tr>
+</tbody></table></div>
+<p>네이버부동산은 성남시 수정구 신흥동을 <code>재개발(F01)</code>로 필터해 현행 지도를 확인했다. 다만 동적 지도에서 <strong>신흥1·신흥3 구역별 개별 매물과 대지지분을 일괄 분리할 수 없었으므로</strong>, 현재 네이버 매물만으로 구역별 대지평당 호가나 호가 프리미엄을 산출하지 않았다.</p>
+<p>대신 구역명이 명시된 과거 개별 매물 확인이력은 별도 보관했다. 신흥1은 2025-05-28 단독·다가구 6.8억원, 대지 72.1㎡, 호가 평당 3,117.8만원 사례가 확인됐으나 월세가 포함됐다. 신흥3은 2025-05~06 확인 사례 4건의 호가 평당이 약 2,969.3만~7,449.7만원으로 넓게 분포했다. 주택 유형, 대지지분, 보증금·월세 조건이 달라 현 시세 또는 동일한 프리미엄으로 읽으면 안 된다.</p>
+<h3 id="section-17">7-3. 프리미엄 계산의 결론</h3>
+<p><code>실제 재개발 프리미엄 = 매매가 - 종전자산 감정평가액 또는 권리가액</code>으로 본다. 이번 공개 자료로 계산 가능한 <code>공시가격 차액 = 거래가 - 공시가격</code>은 세금 기준가격과의 차이일 뿐 재개발 프리미엄이 아니다. 신흥1·3 모두 후보 물건의 종전자산 감정평가, 권리가액, 예상 분담금, 임차보증금 반환액이 확보되기 전에는 실제 P를 숫자로 제시하지 않는 것이 맞다.</p>
+<p>실거래 40건, 공개 호가 97건, 네이버부동산 과거 확인 매물 5건과 산식을 담은 엑셀 원자료는 <code>outputs/신흥1_신흥3_실거래_호가_20260902/성남_신흥1_신흥3_실거래_호가_20260902.xlsx</code>에 정리했다.</p>
+<h2 id="section-18">8. 개별 매물 검토 체크리스트</h2>
+<h3 id="section-19">8-1. 권리와 가격을 분리해서 보기</h3>
 <div class="table-scroll"><table>
 <thead><tr>
 <th>순서</th>
@@ -821,7 +892,7 @@
 <td>같은 구역 안의 개별 지번 가격차 설명</td>
 </tr>
 </tbody></table></div>
-<h3 id="section-16">7-2. 프리미엄의 올바른 계산</h3>
+<h3 id="section-20">8-2. 프리미엄의 올바른 계산</h3>
 <p><code>매매가 - 종전자산 감정평가액 또는 권리가액</code>이 실제 재개발 프리미엄을 판단하는 출발점이다. 공개된 구역 전체 세대수나 시공사 공사금액만으로 개별 물건의 프리미엄을 계산할 수 없다. 특히 신흥3은 사업시행계획인가 전이므로 설계·공사비·분양안이 더 변할 여지가 있다.</p>
 <div class="table-scroll"><table>
 <thead><tr>
@@ -847,7 +918,7 @@
 </tr>
 </tbody></table></div>
 <hr>
-<h2 id="section-17">8. 다음 조사 작업</h2>
+<h2 id="section-21">9. 다음 조사 작업</h2>
 <div class="table-scroll"><table>
 <thead><tr>
 <th>우선순위</th>
@@ -897,7 +968,7 @@
 </tr>
 </tbody></table></div>
 <hr>
-<h2 id="section-18">9. 주요 원문 출처</h2>
+<h2 id="section-22">10. 주요 원문 출처</h2>
 <ul>
 <li>성남시 신흥1 사업시행계획인가 발표: <a href="https://snvision.seongnam.go.kr/22116" target="_blank" rel="noopener noreferrer">https://snvision.seongnam.go.kr/22116</a></li>
 <li>LH 신흥1 사업시행계획인가 보도자료: <a href="https://www.lh.or.kr/gallery.es?act=view&amp;b_list=8&amp;bid=0003&amp;keyField=&amp;list_no=11960&amp;mid=a10502000000&amp;nPage=16&amp;orderby=&amp;vlist_no_npage=25" target="_blank" rel="noopener noreferrer">https://www.lh.or.kr/gallery.es?act=view&amp;b_list=8&amp;bid=0003&amp;keyField=&amp;list_no=11960&amp;mid=a10502000000&amp;nPage=16&amp;orderby=&amp;vlist_no_npage=25</a></li>
@@ -907,6 +978,11 @@
 <li>LH 정비통통 신흥3 추진현황, 2026-05-19: <a href="https://tongtong.lh.or.kr/tongtong/na/ntt/selectNttInfo.do?currPage=1&amp;mi=2188&amp;nttSn=1480" target="_blank" rel="noopener noreferrer">https://tongtong.lh.or.kr/tongtong/na/ntt/selectNttInfo.do?currPage=1&amp;mi=2188&amp;nttSn=1480</a></li>
 <li>성남시 신흥3·태평3 LH 사업시행자 지정·고시 안내: <a href="https://m.snvision.seongnam.go.kr/a.html?uid=18993" target="_blank" rel="noopener noreferrer">https://m.snvision.seongnam.go.kr/a.html?uid=18993</a></li>
 <li>대우건설 신흥3 시공자 선정 발표: <a href="https://m.daewooenc.com/news/news-view?idx=14541" target="_blank" rel="noopener noreferrer">https://m.daewooenc.com/news/news-view?idx=14541</a></li>
+<li>국토교통부 실거래가 공개시스템: <a href="https://rt.molit.go.kr/pt/qut/qut.do" target="_blank" rel="noopener noreferrer">https://rt.molit.go.kr/pt/qut/qut.do</a></li>
+<li>재개발닷컴 신흥1 실거래·호가 공개 페이지: <a href="https://jaegebal.co.kr/develops/4027" target="_blank" rel="noopener noreferrer">https://jaegebal.co.kr/develops/4027</a> , <a href="https://jaegebal.co.kr/develops/4027/asks" target="_blank" rel="noopener noreferrer">https://jaegebal.co.kr/develops/4027/asks</a></li>
+<li>재개발닷컴 신흥3 실거래·호가 공개 페이지: <a href="https://jaegebal.co.kr/develops/4072" target="_blank" rel="noopener noreferrer">https://jaegebal.co.kr/develops/4072</a> , <a href="https://jaegebal.co.kr/develops/4072/asks" target="_blank" rel="noopener noreferrer">https://jaegebal.co.kr/develops/4072/asks</a></li>
+<li>네이버부동산 신흥동 재개발 지도 필터: <a href="https://fin.land.naver.com/map?center=3zoOEu-2AH2TC&amp;realEstateTypes=F01&amp;tradeTypes=A1-B1-B2-B3&amp;zoom=17.49880630642608&amp;showOnlySelectedRegion=true" target="_blank" rel="noopener noreferrer">https://fin.land.naver.com/map?center=3zoOEu-2AH2TC&amp;realEstateTypes=F01&amp;tradeTypes=A1-B1-B2-B3&amp;zoom=17.49880630642608&amp;showOnlySelectedRegion=true</a></li>
+<li>네이버부동산 구역명 명시 과거 확인 매물: <a href="https://fin.land.naver.com/articles/2528723018" target="_blank" rel="noopener noreferrer">https://fin.land.naver.com/articles/2528723018</a> , <a href="https://fin.land.naver.com/articles/2525197013" target="_blank" rel="noopener noreferrer">https://fin.land.naver.com/articles/2525197013</a> , <a href="https://fin.land.naver.com/articles/2531179199" target="_blank" rel="noopener noreferrer">https://fin.land.naver.com/articles/2531179199</a> , <a href="https://fin.land.naver.com/articles/2531686054" target="_blank" rel="noopener noreferrer">https://fin.land.naver.com/articles/2531686054</a> , <a href="https://fin.land.naver.com/articles/2531686562" target="_blank" rel="noopener noreferrer">https://fin.land.naver.com/articles/2531686562</a></li>
 </ul>
 <blockquote><strong>주의:</strong> 공시·보도·현황 페이지의 세대수와 일정은 변경될 수 있다. 후보 매물을 검토할 때는 계약 전 법정 고시 원문, 지번별 정비구역 편입, 소유권·임차관계, 분양자격, 최신 분양신청·관리처분 자료를 전문가와 함께 확인해야 한다.</blockquote>
       </article>
