@@ -37,6 +37,17 @@ const reports = [
     description: '조합설립인가 이후의 사업 비교와 실거래 기반 기대감 프리미엄을 같은 기준으로 정리한 HTML 보고서',
     accent: '#9a3412',
   },
+  {
+    source: '성남_신흥1_신흥3_재개발_조사보고서.md',
+    output: '성남_신흥1_신흥3_재개발_조사보고서.html',
+    title: '성남 신흥1·신흥3구역 재개발 조사 보고서',
+    shortTitle: '성남 신흥1·3',
+    description: '성남 원도심 신흥1·신흥3구역의 공식 단계, 공공참여 구조, 계획 수치와 권리 확인 과제를 분리한 HTML 보고서',
+    accent: '#a16207',
+    brandTitle: '성남 재개발 보고서',
+    brandDescription: '신흥1 · 신흥3 공공참여 정비사업',
+    dashboard: false,
+  },
 ];
 
 function escapeHtml(value) {
@@ -186,12 +197,26 @@ function renderMarkdown(markdown) {
 
 function renderPage(report, markdown) {
   const { body, toc } = renderMarkdown(markdown);
+  const brandTitle = report.brandTitle ?? '용산 재개발 보고서';
+  const brandDescription = report.brandDescription ?? '서계 · 청파 · 후암 비교 자료';
+  const dashboardLink = report.dashboard === false
+    ? ''
+    : '<a href="서계동_재개발_스터디_대시보드.html">대시보드</a>';
+  const dashboardAction = report.dashboard === false
+    ? ''
+    : '<a class="button primary" href="서계동_재개발_스터디_대시보드.html">대시보드</a>';
   const reportLinks = reports
     .map((item) => {
       const current = item.output === report.output ? ' aria-current="page"' : '';
       return `<a href="${item.output}"${current}>${item.shortTitle}</a>`;
     })
     .join('\n');
+  const quickLinks = [dashboardLink, reportLinks].filter(Boolean).join('\n        ');
+  const actionLinks = [
+    dashboardAction,
+    `<a class="button" href="${report.source}">마크다운 원문</a>`,
+    '<button class="button" type="button" onclick="window.print()">인쇄</button>',
+  ].filter(Boolean).join('\n          ');
   const tocLinks = toc
     .map((item) => `<a class="level-${item.level}" href="#${item.id}">${inlineMarkdown(item.text)}</a>`)
     .join('\n');
@@ -564,12 +589,11 @@ function renderPage(report, markdown) {
   <div class="layout">
     <aside>
       <div class="brand">
-        <strong>용산 재개발 보고서</strong>
-        <span>서계 · 청파 · 후암 비교 자료</span>
+        <strong>${escapeHtml(brandTitle)}</strong>
+        <span>${escapeHtml(brandDescription)}</span>
       </div>
       <div class="quick-links" aria-label="보고서 이동">
-        <a href="서계동_재개발_스터디_대시보드.html">대시보드</a>
-        ${reportLinks}
+        ${quickLinks}
       </div>
       <nav class="toc" aria-label="문서 목차">
         ${tocLinks}
@@ -581,9 +605,7 @@ function renderPage(report, markdown) {
         <h1>${escapeHtml(report.title)}</h1>
         <p>${escapeHtml(report.description)}</p>
         <div class="actions">
-          <a class="button primary" href="서계동_재개발_스터디_대시보드.html">대시보드</a>
-          <a class="button" href="${report.source}">마크다운 원문</a>
-          <button class="button" type="button" onclick="window.print()">인쇄</button>
+          ${actionLinks}
         </div>
       </header>
       <article>
